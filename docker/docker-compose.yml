@@ -1,0 +1,60 @@
+version: '2'
+
+services:
+  phpfpm:
+    build:
+      context: ./php
+    command: "sh -c '
+    composer install --no-interaction &&
+    (while ! nc -z postgresql 5432;
+      do
+        echo No postgres connections;
+        sleep 1;
+      done;)
+    && php bin/console  doctrine:migrations:migrate --no-interaction --allow-no-migration &&
+    php-fpm;
+    '"
+    networks:
+      - app-tier
+    depends_on:
+      - postgresql
+    ports:
+      - 9000:9000
+    volumes:
+      - ../back/:/app
+  nginx:
+      image: 'bitnami/nginx:latest'
+      depends_on:
+        - phpfpm
+      networks:
+        - app-tier
+      ports:
+        - 8000:8000
+      volumes:
+        - ./nginx/vhost.conf:/bitnami/nginx/conf/vhosts/7cart.conf
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - 5438:5432
+    volumes:
+      - ./data/postgres:/bitnami
+    networks:
+      - app-tier
+    environment:
+          - POSTGRESQL_USERNAME=scart
+          - POSTGRESQL_PASSWORD=scart
+          - POSTGRESQL_DATABASE=scart
+  nodejs:
+      image: 'bitnami/node:8'
+      command: "sh -c 'npm install && ./node_modules/ember-cli/bin/ember server'"
+      ports:
+        - 4200:4200
+        - 7020:7020
+      volumes:
+        - ../front/:/app
+      networks:
+        - app-tier
+
+networks:
+    app-tier:
+      driver: bridge
