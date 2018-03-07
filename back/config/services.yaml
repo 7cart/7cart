@@ -26,3 +26,10 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    7cart.serializer:
+        alias: App\Service\Serializer
+        public: true
+    7cart.helper:
+        alias: App\Service\Helper
+        public: true

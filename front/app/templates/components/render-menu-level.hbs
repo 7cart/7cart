@@ -1,0 +1,12 @@
+{{#if category.children}}
+  <div class="row">
+    {{#each category.children as |subCategory|}}
+      <div class="col-xs-6 col-lg-4">
+        <h2>{{#link-to 'category' subCategory}}{{subCategory.title}}{{/link-to}}</h2>
+        <p></p>
+      </div>
+    {{/each}}
+  </div>
+{{/if}}
+
+{{yield}}
