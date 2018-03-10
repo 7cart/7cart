@@ -12,6 +12,7 @@ services:
         sleep 1;
       done;)
     && php bin/console  doctrine:migrations:migrate --no-interaction --allow-no-migration &&
+    cp .env.dist .env &&
     php-fpm;
     '"
     networks:

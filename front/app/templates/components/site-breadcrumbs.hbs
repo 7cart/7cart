@@ -1,11 +1,13 @@
-<ol class="breadcrumb">
-  {{#each bcService.breadcrumbs as |item| }}
-    <li>
-      {{#link-to 'category' item}}
-        {{item.title}}
-      {{/link-to}}
-    </li>
-  {{/each }}
-</ol>
+{{#if bcService.breadcrumbs}}
+  <ol class="breadcrumb">
+    {{#each bcService.breadcrumbs as |item| }}
+      <li>
+        {{#link-to 'category' item}}
+          {{item.title}}
+        {{/link-to}}
+      </li>
+    {{/each }}
+  </ol>
+{{/if}}
 
 {{yield}}

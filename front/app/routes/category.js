@@ -9,5 +9,10 @@ export default Route.extend({
   setupController: function(controller, model) {
     this.get('breadcrumbs').setCurrentCategory(model);
     this._super(controller, model);
+  },
+  actions: {
+    willTransition() {
+      this.get('breadcrumbs').setCurrentCategory(null);
+    }
   }
 });

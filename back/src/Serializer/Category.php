@@ -2,7 +2,7 @@
 
 namespace App\Serializer;
 
-use \Neomerx\JsonApi\Schema\BaseSchema as BaseSchema;
+use \Neomerx\JsonApi\Schema\BaseSchema;
 use \Neomerx\JsonApi\Schema\BaseSchema as CategoryEntity;
 
 class Category extends BaseSchema
