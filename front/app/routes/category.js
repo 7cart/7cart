@@ -6,6 +6,16 @@ export default Route.extend({
   model: function (params) {
     return this.store.peekRecord('category', params.id);
   },
+  afterModel: function (model) {
+    if (model.get('nodes')){
+      model.set('nodes.isLoaded', false);
+    }
+    Ember.RSVP.hash({
+      nodes: this.store.query('node', {'category_id': model.get('id')})
+    }).then((res) => {
+      model.set('nodes', res.nodes);
+    });
+  },
   setupController: function(controller, model) {
     this.get('breadcrumbs').setCurrentCategory(model);
     this._super(controller, model);

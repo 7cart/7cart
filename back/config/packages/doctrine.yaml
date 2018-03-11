@@ -8,8 +8,8 @@ parameters:
 doctrine:
     dbal:
         # configure these for your database server
-        driver: 'pdo_mysql'
-        server_version: '5.7'
+        driver: 'pdo_pgsql'
+        server_version: '9.6'
         charset: utf8
         mapping_types:
             jsonb: json_array
@@ -27,3 +27,6 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+        dql:
+            string_functions:
+                CONTAINS: Opsway\Doctrine\ORM\Query\AST\Functions\Contains

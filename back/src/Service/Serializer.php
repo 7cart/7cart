@@ -22,6 +22,7 @@ class Serializer
 
         $encoder = Encoder::instance([
             'App\Entity\Category' => 'App\Serializer\Category',
+            'App\Entity\Node' => 'App\Serializer\Node',
         ], new EncoderOptions(
             JSON_PRETTY_PRINT,
             $this->requestStack->getCurrentRequest()->getUriForPath('/api/v1')
@@ -33,8 +34,7 @@ class Serializer
         ], [
             // Attributes and relationships that should be shown
             'categories'  => ['id', 'title', 'parent-id', 'children'],
-            //'articles'  => [],
-            //'people' => ['first_name'],
+            'node'  => ['id', 'title']
         ]);
 
         return $encoder->encodeData($data, $options);

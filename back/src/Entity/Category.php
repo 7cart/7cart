@@ -35,11 +35,9 @@ class Category
     protected $parent;
 
      /**
-     * @ORM\Column(type="json", options={"jsonb": true})
+     * @ORM\Column(type="json_array", options={"jsonb": true})
      */
     protected $title;
-
-    private $_helper;
 
     public function __construct()
     {

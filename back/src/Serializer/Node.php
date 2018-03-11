@@ -3,11 +3,11 @@
 namespace App\Serializer;
 
 use \Neomerx\JsonApi\Schema\BaseSchema;
-use \App\Entity\Category as CategoryEntity;
+use \App\Entity\Node as NodeEntity;
 
-class Category extends BaseSchema
+class Node extends BaseSchema
 {
-    protected $resourceType = 'categories';
+    protected $resourceType = 'nodes';
 
     public function getId($data): ?string
     {
@@ -18,18 +18,15 @@ class Category extends BaseSchema
     {
         //@TODO: rewrite global variable
         global $kernel;
-        /** @var CategoryEntity $data */
+        /** @var NodeEntity $data */
         return [
             'title' => $kernel->getContainer()->get('7cart.helper')->findRequestedTranslation($data->getTitle()),
-            'parent-id'  => $data->getParentId(),
         ];
     }
 
     public function getRelationships($data, bool $isPrimary, array $includeRelationships): ?array
     {
-        /** @var CategoryEntity $data */
-        return [
-            'children' => [self::DATA => $data->getChildren()],
-        ];
+        /** @var NodeEntity $data */
+        return [];
     }
 }
