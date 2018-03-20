@@ -14,11 +14,11 @@ class NodeController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = $this->getDoctrine()
+        $nodes = $this->getDoctrine()
             ->getRepository( \App\Entity\Node::class)
-            ->findNodesByCategory($request->get('category_id', 0))
+            ->findNodesByCategory($request->get('category_id', 0), $request->get('f'))
             ->execute();
 
-        return new Response($this->get('7cart.serializer')->serialize($categories));
+        return new Response($this->get('7cart.serializer')->serialize($nodes));
     }
 }

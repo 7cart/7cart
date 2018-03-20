@@ -7,7 +7,9 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('category', { path: '/category/:id' });
+  this.route('category', { path: '/category/:id/' }, function () {
+    this.route('filter', {path: '/:filter/'});
+  });
 });
 
 export default Router;

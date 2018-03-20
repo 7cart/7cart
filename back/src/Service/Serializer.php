@@ -23,18 +23,21 @@ class Serializer
         $encoder = Encoder::instance([
             'App\Entity\Category' => 'App\Serializer\Category',
             'App\Entity\Node' => 'App\Serializer\Node',
+            'App\Entity\Attribute' => 'App\Serializer\Attribute',
+            'App\Entity\AttributeValue' => 'App\Serializer\AttributeValue',
         ], new EncoderOptions(
             JSON_PRETTY_PRINT,
             $this->requestStack->getCurrentRequest()->getUriForPath('/api/v1')
         ));
 
         $options = new EncodingParameters([
-            // Paths to be included. Note 'posts.comments' will not be shown.
-            // 'children'
+             'attribute-values'
         ], [
             // Attributes and relationships that should be shown
             'categories'  => ['id', 'title', 'parent-id', 'children'],
-            'node'  => ['id', 'title']
+            'nodes'  => ['id', 'title'],
+            'attributes' => ['id', 'name', 'attribute-values'],
+            'attribute_values' => ['id', 'value']
         ]);
 
         return $encoder->encodeData($data, $options);

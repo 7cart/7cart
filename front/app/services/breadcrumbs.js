@@ -8,11 +8,11 @@ export default Service.extend({
     this.set('breadcrumbs', []);
     this.set('currentCategory', null);
   },
-  setCurrentCategory: function(category) {
+  setCurrentCategory(category) {
     this.set('currentCategory', category);
     this.set('breadcrumbs', this._buildBreadcrumb(category).reverse());
   },
-  _buildBreadcrumb: function(category) {
+  _buildBreadcrumb(category) {
     let bc = [];
     if (category && category.get('id')) {
       bc.push(category);

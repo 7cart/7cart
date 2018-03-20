@@ -47,7 +47,7 @@ services:
           - POSTGRESQL_DATABASE=scart
   nodejs:
       image: 'bitnami/node:8'
-      command: "sh -c 'npm install --unsafe && ./node_modules/ember-cli/bin/ember server'"
+      command: "sh -c 'npm install --unsafe && ./node_modules/ember-cli/bin/ember serve'"
       ports:
         - 4200:4200
         - 7020:7020

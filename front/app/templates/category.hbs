@@ -1,11 +1,17 @@
-<div class="container">
+<div class="container-fluid">
 
   {{site-breadcrumbs}}
   {{render-menu-level category=model}}
 
   <hr>
-  <div class="container">
-    {{nodes-list nodes=model.nodes}}
+
+  <div class="container-fluid">
+    <div class="row">
+      {{site-filter attributes=model.attributes}}
+      <div>
+        {{nodes-list nodes=model.nodes}}
+      </div>
+    </div>
   </div>
 
 </div>

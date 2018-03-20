@@ -4,7 +4,7 @@ import { observer } from '@ember/object';
 
 export default Helper.extend({
   bcService: service('breadcrumbs'),
-  onNewUser: observer('bcService.breadcrumbs', function() {
+  onChanged: observer('bcService.breadcrumbs', function() {
     this.recompute();
   }),
   compute(catId) {

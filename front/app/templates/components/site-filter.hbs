@@ -1,0 +1,41 @@
+{{#if attributes}}
+
+  <div class="navbar navbar-default visible-xs">
+    <div class="container-fluid">
+      {{#bs-button onClick=(action (mut collapsedSidebar) (if collapsedSidebar false true)) class="btn btn-default navbar-btn"}}
+        <i class="fa fa-tasks"></i> Filter
+      {{/bs-button}}
+    </div>
+  </div>
+
+  {{#bs-collapse collapsed=(if collapsedSidebar false true) class="col-xs-7 col-sm-3 visible-sm visible-md visible-lg collapse sliding-sidebar"}}
+    <div>
+      {{#bs-accordion as |acc|}}
+
+        {{#each attributes as |attribute|}}
+          {{#acc.item value=attribute.id as |aitem|}}
+
+            {{#aitem.title}}
+              {{attribute.name}}
+            {{/aitem.title}}
+
+            {{#aitem.body }}
+              {{elements/multi-select-checkboxes
+                options=attribute.attributeValues
+                selection=(get selectedFilter attribute.id)
+                updateSelectionValue=false
+                labelProperty='value'
+                valueProperty='id'
+                onchange=(action 'filtering' attribute.id)
+              }}
+            {{/aitem.body}}
+
+          {{/acc.item}}
+        {{/each}}
+
+      {{/bs-accordion}}
+    </div>
+  {{/bs-collapse}}
+{{/if}}
+
+{{yield}}
