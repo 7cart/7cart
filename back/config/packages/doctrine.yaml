@@ -30,3 +30,5 @@ doctrine:
         dql:
             string_functions:
                 CONTAINS: Opsway\Doctrine\ORM\Query\AST\Functions\Contains
+                GET_JSON_FIELD: Opsway\Doctrine\ORM\Query\AST\Functions\GetJsonField
+                GET_NUMERIC_JSON_FIELD: App\Functions\GetNumericJsonField

@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 import {inject as service} from '@ember/service';
 import {observer} from '@ember/object';
 import {on} from '@ember/object/evented';
+import RSVP from 'rsvp';
 
 export default Route.extend({
   breadcrumbs: service(),
@@ -13,16 +14,17 @@ export default Route.extend({
     this.refresh();
   }),
   model(params) {
-      return this.store.peekRecord('category', params.id);
+      return this.get('store').peekRecord('category', params.id);
   },
   afterModel(model) {
     if (model.get('nodes')) {
       model.set('nodes.isLoaded', false);
     }
-    model.set('attributes', this.store.peekAll('attribute'));
-    Ember.RSVP.hash({
-      nodes: this.store.query('node', {'category_id': model.get('id'), 'f': this.get('filter.filterStr')})
+    model.set('attributes', this.get('store').peekAll('attribute'));
+    RSVP.hash({
+      nodes: this.get('store').query('node', {'category_id': model.get('id'), 'f': this.get('filter.filterStr')})
     }).then((res) => {
+      this.set('filter.filterCounter', res.nodes.get('meta.filter-counter'));
       model.set('nodes', res.nodes);
     });
   },

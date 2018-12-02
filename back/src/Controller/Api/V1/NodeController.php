@@ -16,9 +16,12 @@ class NodeController extends Controller
     {
         $nodes = $this->getDoctrine()
             ->getRepository( \App\Entity\Node::class)
-            ->findNodesByCategory($request->get('category_id', 0), $request->get('f'))
-            ->execute();
+            ->findNodesByCategory($request->get('category_id', 0), $request->get('f'));
 
-        return new Response($this->get('7cart.serializer')->serialize($nodes));
+        $counter = $this->getDoctrine()
+            ->getRepository( \App\Entity\Node::class)
+            ->countNodesByCategory($request->get('category_id', 0), $request->get('f'));
+
+        return new Response($this->get('7cart.serializer')->serialize($nodes, ['filter-counter' => $counter]));
     }
 }

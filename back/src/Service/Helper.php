@@ -24,7 +24,7 @@ class Helper
         $lang = $this->requestStack->getCurrentRequest()->headers->get('accept-language');
         if (array_key_exists($lang, $data)) {
             $title = $data[$lang];
-        } else if (array_values($data)){
+        } else if (array_values($data)) {
             $title = array_values($data)[0];
         }
 

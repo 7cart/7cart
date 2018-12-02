@@ -1,41 +1,51 @@
-{{#if attributes}}
+  {{#if attributes}}
 
-  <div class="navbar navbar-default visible-xs">
-    <div class="container-fluid">
-      {{#bs-button onClick=(action (mut collapsedSidebar) (if collapsedSidebar false true)) class="btn btn-default navbar-btn"}}
-        <i class="fa fa-tasks"></i> Filter
-      {{/bs-button}}
+    <div style="{{unless nodes.isLoaded "opacity: 0.7"}}">
+    <div class="navbar navbar-default visible-xs">
+      <div class="container-fluid">
+        {{#bs-button onClick=(action (mut collapsedSidebar) (if collapsedSidebar false true)) class="btn btn-default navbar-btn"}}
+          <i class="fa fa-tasks"></i> Filter
+        {{/bs-button}}
+      </div>
     </div>
-  </div>
 
-  {{#bs-collapse collapsed=(if collapsedSidebar false true) class="col-xs-7 col-sm-3 visible-sm visible-md visible-lg collapse sliding-sidebar"}}
-    <div>
-      {{#bs-accordion as |acc|}}
+    {{#bs-collapse collapsed=(if collapsedSidebar false true) class="col-xs-7 col-sm-3 visible-sm visible-md visible-lg collapse sliding-sidebar"}}
+      <div>
+        {{#bs-accordion as |acc|}}
 
-        {{#each attributes as |attribute|}}
-          {{#acc.item value=attribute.id as |aitem|}}
+          {{#each attributes as |attribute|}}
+            {{#acc.item value=attribute.id as |aitem|}}
 
-            {{#aitem.title}}
-              {{attribute.name}}
-            {{/aitem.title}}
+              {{#aitem.title}}
+                {{attribute.name}}
+              {{/aitem.title}}
 
-            {{#aitem.body }}
-              {{elements/multi-select-checkboxes
-                options=attribute.attributeValues
-                selection=(get selectedFilter attribute.id)
-                updateSelectionValue=false
-                labelProperty='value'
-                valueProperty='id'
-                onchange=(action 'filtering' attribute.id)
-              }}
-            {{/aitem.body}}
+              {{#aitem.body }}
 
-          {{/acc.item}}
-        {{/each}}
+                {{#if attribute.isRange}}
+                  {{elements/range-select name=attribute.name selectedFilter=selectedFilter onchange=(action 'filtering')}}
+                {{else}}
+                  {{elements/multi-select-checkboxes
+                    options=attribute.attributeValues
+                    selection=(get selectedFilter attribute.id)
+                    updateSelectionValue=false
+                    labelProperty='value'
+                    valueProperty='id'
+                    attributeId = attribute.id
+                    isLoaded = nodes.isLoaded
+                    onchange=(action 'filtering' attribute.id)
+                  }}
+                {{/if}}
 
-      {{/bs-accordion}}
+              {{/aitem.body}}
+
+            {{/acc.item}}
+          {{/each}}
+
+        {{/bs-accordion}}
+      </div>
+    {{/bs-collapse}}
     </div>
-  {{/bs-collapse}}
-{{/if}}
+  {{/if}}
 
 {{yield}}

@@ -2,5 +2,10 @@
   <div>
       {{input type='checkbox' checked=checkbox.isSelected disabled=disabled}}
       {{checkbox.label}}
+
+    {{#if isLoaded}}
+     ({{filter-value-count checkbox.value attributeId}})
+    {{/if}}
+
   </div>
 {{/each}}

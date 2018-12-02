@@ -17,7 +17,7 @@ class Serializer
         $this->requestStack = $requestStack;
     }
 
-    public function serialize($data)
+    public function serialize($data, $meta = null)
     {
 
         $encoder = Encoder::instance([
@@ -36,11 +36,11 @@ class Serializer
             // Attributes and relationships that should be shown
             'categories'  => ['id', 'title', 'parent-id', 'children'],
             'nodes'  => ['id', 'title'],
-            'attributes' => ['id', 'name', 'attribute-values'],
+            'attributes' => ['id', 'name', 'attribute-values', 'data-type'],
             'attribute_values' => ['id', 'value']
         ]);
 
-        return $encoder->encodeData($data, $options);
+        return $encoder->withMeta($meta)->encodeData($data, $options);
     }
 }
 

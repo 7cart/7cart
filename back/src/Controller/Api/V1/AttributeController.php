@@ -15,7 +15,7 @@ class AttributeController extends Controller
     {
         $attributes = $this->getDoctrine()
             ->getRepository(\App\Entity\Attribute::class)
-            ->findAll();
+            ->findBy(['isActive' => true]);
 
         return new Response($this->get('7cart.serializer')->serialize($attributes));
     }

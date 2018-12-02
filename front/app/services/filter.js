@@ -14,8 +14,13 @@ export default Service.extend({
     let sections = [];
     Object.keys(filterObj).forEach((key) => {
       let values = filterObj.get(key);
-      if (values && values.length > 0) {
-        sections.push(key + '=' + values.join(","));
+      console.log(values);
+      if (values) {
+        if (values.hasOwnProperty('min') && values.hasOwnProperty('max')) {
+          sections.push(key + '=' + values.min + '-' + values.max);
+        } else if (values.length > 0) {
+          sections.push(key + '=' + values.join(","));
+        }
       }
     });
     return this.get('prefix') + sections.join(';');
@@ -32,10 +37,10 @@ export default Service.extend({
         let [attr, values] = section.split('=');
         if (values && attr) {
           let attrId = attr;
-          if (values.indexOf('-') > -1) {
-            let found = values.match(/(\d*)-(\d*)/i);
-            if (found && found.length == 3) {
-              filterObj.set(attrId, A([{'min': found[1] || 0, 'max': found[2] || 0}]));
+          let found = values.match(/(-*\d+)-(-*\d+)/i);
+          if (found) {
+            if (found.length == 3) {
+              filterObj.set(attrId, A({"min": found[1] || 0, "max": found[2] || ''}));
             }
           } else {
             filterObj.set(attrId, A(values.split(',').map((v) => {

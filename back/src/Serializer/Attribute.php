@@ -20,7 +20,8 @@ class Attribute extends BaseSchema
         global $kernel;
         /** @var AttributeEntity $data */
         return [
-            'name' => $data->getName()//$kernel->getContainer()->get('7cart.helper')->findRequestedTranslation($data->getTitle()),
+            'name' => $data->getName(),
+            'data-type' => $data->getDataType()//$kernel->getContainer()->get('7cart.helper')->findRequestedTranslation($data->getTitle()),
         ];
     }
 
