@@ -1,0 +1,20 @@
+Problem: EACCES: permission denied, mkdir '/bitnami/mariadb'
+Solution for Arch-linux systems:
+append 7cart/docker-compose.yml file with the following blocks
+
+version: '2'
+
+services:
+........
+
+  fix-postgres-permissions:
+    image: 'bitnami/postgresql:9.6'
+    user: root
+    command: chown -R 1001:1001 /bitnami
+    volumes:
+    - ./data/postgres:/bitnami
+    
+  postgresql:
+  .....
+      depends_on:
+      - fix-postgres-permissions
