@@ -2,6 +2,10 @@
 
 This repository is an open source e-commerce platform. It may be used as an online store, online store platform, or service oriented platform.
 
+It is built in a Docker container, thus it can be quickly deployed and run on a virtually any system.
+
+The project database schema does not implement the traditional [EAV](https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model) DB pattern, but simpler and efficient [JSONB](https://coussej.github.io/2016/01/14/Replacing-EAV-with-JSONB-in-PostgreSQL/)
+
 ## Contributing
 
 Contributions to 7cart are highly welcomed.
