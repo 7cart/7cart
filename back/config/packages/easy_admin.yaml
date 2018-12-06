@@ -1,3 +1,10 @@
 easy_admin:
     entities:
-      - App\Entity\Node
+        Node:
+            class: App\Entity\Node
+            label: 'Products'
+            list:
+                fields: ['title','description','price']
+                title: 'List of products'
+            form:
+                fields: ['title','description']

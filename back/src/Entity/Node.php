@@ -38,6 +38,12 @@ class Node
      */
     protected $attributes;
 
+    /**
+     * @return mixed
+     */
+
+    public function getPrice(){return $this->attributes['price'];}
+public function getDescription(){return $this->description;}
 
 
     /**
@@ -57,6 +63,39 @@ class Node
         {
             return $this->title;
         }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title): void
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @param mixed $categoriesId
+     */
+    public function setCategoriesId($categoriesId): void
+    {
+        $this->categoriesId = $categoriesId;
+    }
+
+    /**
+     * @param mixed $attributes
+     */
+    public function setAttributes($attributes): void
+    {
+        $this->attributes = $attributes;
+    }
+
 
 }
 
