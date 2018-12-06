@@ -33,6 +33,7 @@ services:
         - 8000:8000
       volumes:
         - ./nginx/vhost.conf:/bitnami/nginx/conf/vhosts/7cart.conf
+        - ../back/public/:/app/public
   postgresql:
     image: 'bitnami/postgresql:9.6'
     ports:
