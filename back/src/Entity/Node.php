@@ -33,18 +33,52 @@ class Node
      */
     protected $categoriesId;
 
+    //use only in admin form  builder
+    protected $categories;
+
     /**
      * @ORM\Column(type="json_array", options={"jsonb": true}, nullable=true)
      */
     protected $attributes;
 
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+
+    public function setCategories($categories)
+    {
+        $arr = [];
+        $this->categories = $categories;
+        foreach ($this->categories as $category) {
+            $arr[] = $category->getId();
+        }
+        $this->categoriesId = $arr;
+    }
+
+    public function __toString()
+    {
+        return json_encode($this->getTitle(), JSON_UNESCAPED_UNICODE);
+    }
+
     /**
      * @return mixed
      */
+    public function getPrice()
+    {
+        return isset($this->attributes['price']) ? $this->attributes['price'] : 0;
+    }
 
-    public function getPrice(){return $this->attributes['price'];}
-public function getDescription(){return $this->description;}
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
+    public function getCategories()
+    {
+        return $this->categories;
+    }
 
     /**
      * @return mixed
@@ -55,14 +89,15 @@ public function getDescription(){return $this->description;}
     }
 
     public function getId()
-        {
-            return $this->id;
-        }
+    {
+        return $this->id;
+    }
 
-     public function getTitle()
-        {
-            return $this->title;
-        }
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
 
     /**
      * @param mixed $title
@@ -95,7 +130,6 @@ public function getDescription(){return $this->description;}
     {
         $this->attributes = $attributes;
     }
-
 
 }
 

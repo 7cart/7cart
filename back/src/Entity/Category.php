@@ -30,7 +30,7 @@ class Category
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
      */
     protected $parent;
 
@@ -44,10 +44,24 @@ class Category
         $this->children = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return json_encode($this->getTitle(), JSON_UNESCAPED_UNICODE);
+    }
 
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getParent()
+    {
+        return (isset($this->parent) && $this->parent->getId() > 0) ? $this->parent : null;
+    }
+
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
     }
 
     public function getParentId(): int
