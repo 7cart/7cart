@@ -3,6 +3,8 @@ easy_admin:
       Node:
         class: App\Entity\Node
         label: 'Products'
+        show:
+          fields: ['id', 'title', 'description', 'price', 'categories']
         list:
           title: 'List of products'
           fields: ['id', 'title', 'description', 'price']
@@ -15,7 +17,8 @@ easy_admin:
             - { property: 'title', type: 'App\Form\Type\LocaleKeyValueType'}
             - { property: 'description', type: 'App\Form\Type\LocaleKeyValueType'}
             - { property: 'categories', type: 'easyadmin_autocomplete', type_options:{multiple: true, class: 'App\Entity\Category'}}
-
+            - { type: 'group', css_class: 'col-sm-12' }
+            - { property: 'attributes', type: 'App\Form\Type\NodeAttributesType'}
       Category:
         class: App\Entity\Category
         label: 'Categories'
@@ -32,3 +35,25 @@ easy_admin:
           fields:
           - { property: 'title', label: 'Title', type: 'App\Form\Type\LocaleKeyValueType' }
           - { property: 'parent', type: 'easyadmin_autocomplete', label: 'Parent category' }
+      Attribute:
+         class: App\Entity\Attribute
+         label: 'Attributes'
+         list:
+           fields:
+            - 'id'
+            - 'name'
+            - 'data_type'
+            - 'input_type'
+            - { property: 'is_active', type: 'boolean'}
+            - { property: 'is_multi', type: 'boolean'}
+         form:
+           fields:
+            - 'name'
+            - { property: 'data_type', type: 'choice', type_options: {required: true, choices:{string: 'string', integer: 'integer', float: 'float' }}}
+            - { property: 'input_type', type: 'choice', type_options: {required: true, choices:{text: 'text', select: 'select', multiSelect: 'multiSelect'}}}
+            - { property: 'is_active', type: 'checkbox'}
+            - { property: 'is_multi', type: 'checkbox'}
+            - { property: 'values', type_options: {'disabled': true}}
+      AttributeValue:
+         class: App\Entity\AttributeValue
+         label: 'Attribute Values'

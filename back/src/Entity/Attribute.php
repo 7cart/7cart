@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -23,7 +24,7 @@ class Attribute
     protected $name;
 
     /**
-     * Many Users have Many Groups.
+     *
      * @ORM\OneToMany(targetEntity="AttributeValue", mappedBy="attribute", fetch="EAGER")
      */
     private $values;
@@ -48,6 +49,10 @@ class Attribute
      */
     protected $isMulti;
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     public function __construct()
     {
@@ -78,6 +83,11 @@ class Attribute
     public function getName()
     {
         return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**
