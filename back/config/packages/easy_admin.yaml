@@ -38,22 +38,17 @@ easy_admin:
       Attribute:
          class: App\Entity\Attribute
          label: 'Attributes'
-         list:
-           fields:
-            - 'id'
-            - 'name'
-            - 'data_type'
-            - 'input_type'
-            - { property: 'is_active', type: 'boolean'}
-            - { property: 'is_multi', type: 'boolean'}
          form:
            fields:
             - 'name'
-            - { property: 'data_type', type: 'choice', type_options: {required: true, choices:{string: 'string', integer: 'integer', float: 'float' }}}
-            - { property: 'input_type', type: 'choice', type_options: {required: true, choices:{text: 'text', select: 'select', multiSelect: 'multiSelect'}}}
+            - { property: 'data_type', type: 'choice', type_options: {required: true, choices: {'Text': 'string', 'Number': 'integer', 'Floating point number': 'numeric' }}}
+            - { property: 'input_type', type: 'choice', type_options: {required: true, choices: {'Text': 'text', 'Multi text': 'multiText','Select': 'select', 'Multi select': 'multiSelect'}}}
             - { property: 'is_active', type: 'checkbox'}
-            - { property: 'is_multi', type: 'checkbox'}
             - { property: 'values', type_options: {'disabled': true}}
       AttributeValue:
          class: App\Entity\AttributeValue
          label: 'Attribute Values'
+         list:
+          fields: ['id', 'value', 'attribute']
+         form:
+           fields: ['value', 'attribute']

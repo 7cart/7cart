@@ -18,6 +18,11 @@ class AttributeValue
     protected $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $attributeId;
+
+    /**
      * @ORM\Column(type="string")
      *
      */

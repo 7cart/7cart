@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -20,6 +21,7 @@ class Attribute
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\Regex("/^[a-zA-Z]+[0-9]*$/")
      */
     protected $name;
 
@@ -43,11 +45,6 @@ class Attribute
      * @ORM\Column(type="boolean", options={"default": 0})
      */
     protected $isActive;//filtered
-
-    /**
-     * @ORM\Column(type="boolean", options={"default": 0})
-     */
-    protected $isMulti;
 
     public function __toString()
     {
@@ -125,22 +122,6 @@ class Attribute
     /**
      * @return mixed
      */
-    public function getIsMulti()
-    {
-        return $this->isMulti;
-    }
-
-    /**
-     * @param mixed $isMulti
-     */
-    public function setIsMulti($isMulti): void
-    {
-        $this->isMulti = $isMulti;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getInputType()
     {
         return $this->inputType;
@@ -153,6 +134,18 @@ class Attribute
     {
         $this->inputType = $inputType;
     }
+
+
+    public function isMultiValues()
+    {
+        return in_array($this->inputType, ['multiSelect', 'select', 'multiText']);
+    }
+
+    public function isRelated()
+    {
+        return in_array($this->inputType, ['multiSelect', 'select']);
+    }
+
 
 }
 
