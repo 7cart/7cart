@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -45,8 +47,18 @@ class NodeAttributesType extends AbstractType
                     $currentValue = $currentValue[0];
                 }
 
+                $formEntryType = TextType::class;
+                switch ($attribute->getDataType()) {
+                    case 'integer':
+                        $formEntryType = IntegerType::class;
+                        break;
+                    case 'numeric':
+                        $formEntryType = NumberType::class;
+                        break;
+                }
+
                 $constraints = new Type([
-                    'type' => ($attribute->getDataType() != 'integer' ? $attribute->getDataType() : 'digit'),
+                    'type' => $attribute->getDataType(),
                     'message' => 'The value {{ value }} is not a valid {{ type }}.'
                 ]);
 
@@ -65,7 +77,7 @@ class NodeAttributesType extends AbstractType
                 } else {
                     if ($attribute->isMultiValues()) {
                         $form->add($key, NoKeyCollectionType::class, array(
-                            'entry_type' => TextType::class,
+                            'entry_type' => $formEntryType,
                             'entry_options' => ['constraints' => $constraints],
                             'data' => $currentValue,
                             'allow_add' => true,
@@ -73,7 +85,7 @@ class NodeAttributesType extends AbstractType
                             'by_reference' => false,
                         ));
                     } else {
-                        $form->add($key, TextType::class, array(
+                        $form->add($key, $formEntryType, array(
                             'label' => $key,
                             'data' => $currentValue,
                             'constraints' => $constraints
