@@ -7,7 +7,7 @@ use \App\Entity\AttributeValue as AttributeValueEntity;
 
 class AttributeValue extends BaseSchema
 {
-    protected $resourceType = 'attribute_values';
+    protected $resourceType = 'attribute-values';
 
     public function getId($data): ?string
     {

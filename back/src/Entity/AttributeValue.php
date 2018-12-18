@@ -35,6 +35,11 @@ class AttributeValue
     protected $attribute;
 
 
+    public function __toString()
+    {
+        return $this->getValue();
+    }
+
     /**
      * @return mixed
      */
@@ -57,6 +62,11 @@ class AttributeValue
     public function getValue()
     {
         return $this->value;
+    }
+
+    public function setValue($value)
+    {
+        return $this->value = $value;
     }
 
     public function getId()

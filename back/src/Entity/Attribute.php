@@ -3,10 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="attributes")
+ * @UniqueEntity(fields="name", message="Name is already taken.")
  */
 class Attribute
 {
@@ -19,11 +23,12 @@ class Attribute
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\Regex("/^[a-z_]+[0-9]*$/")
      */
     protected $name;
 
     /**
-     * Many Users have Many Groups.
+     *
      * @ORM\OneToMany(targetEntity="AttributeValue", mappedBy="attribute", fetch="EAGER")
      */
     private $values;
@@ -43,11 +48,10 @@ class Attribute
      */
     protected $isActive;//filtered
 
-    /**
-     * @ORM\Column(type="boolean", options={"default": 0})
-     */
-    protected $isMulti;
-
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     public function __construct()
     {
@@ -78,6 +82,11 @@ class Attribute
     public function getName()
     {
         return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**
@@ -115,22 +124,6 @@ class Attribute
     /**
      * @return mixed
      */
-    public function getIsMulti()
-    {
-        return $this->isMulti;
-    }
-
-    /**
-     * @param mixed $isMulti
-     */
-    public function setIsMulti($isMulti): void
-    {
-        $this->isMulti = $isMulti;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getInputType()
     {
         return $this->inputType;
@@ -144,5 +137,23 @@ class Attribute
         $this->inputType = $inputType;
     }
 
+
+    public function isMultiValues()
+    {
+        return in_array($this->inputType, ['multiSelect', 'multiText']);
+    }
+
+    public function isRelated()
+    {
+        return in_array($this->inputType, ['multiSelect', 'select']);
+    }
+
+    public function isNumeric()
+    {
+        return (!$this->isMultiValues() ||
+                $this->dataType == 'numeric' ||
+                $this->dataType == 'integer'
+        );
+    }
 }
 

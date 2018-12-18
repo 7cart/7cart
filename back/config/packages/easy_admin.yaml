@@ -1,0 +1,54 @@
+easy_admin:
+    entities:
+      Node:
+        class: App\Entity\Node
+        label: 'Products'
+        show:
+          fields: ['id', 'title', 'description', 'price', 'categories']
+        list:
+          title: 'List of products'
+          fields: ['id', 'title', 'description', 'price']
+          actions:
+           - { name: 'show', label: '', icon: 'search' }
+           - { name: 'edit', label: '', icon: 'edit' }
+           - { name: 'delete', label: '', icon: 'trash' }
+        form:
+          fields:
+            - { property: 'title', type: 'App\Form\Type\LocaleKeyValueType'}
+            - { property: 'description', type: 'App\Form\Type\LocaleKeyValueType'}
+            - { property: 'categories', type: 'easyadmin_autocomplete', type_options:{multiple: true, class: 'App\Entity\Category'}}
+            - { type: 'group', css_class: 'col-sm-12' }
+            - { property: 'attributes', type: 'App\Form\Type\NodeAttributesType'}
+      Category:
+        class: App\Entity\Category
+        label: 'Categories'
+        list:
+          title: 'List of Categories'
+          actions:
+            - { name: 'show', label: '', icon: 'search' }
+            - { name: 'edit', label: '', icon: 'edit' }
+            - { name: 'delete', label: '', icon: 'trash' }
+          fields: ['id', 'title']
+        show:
+          fields: ['id', 'title', 'parent']
+        form:
+          fields:
+          - { property: 'title', label: 'Title', type: 'App\Form\Type\LocaleKeyValueType' }
+          - { property: 'parent', type: 'easyadmin_autocomplete', label: 'Parent category' }
+      Attribute:
+         class: App\Entity\Attribute
+         label: 'Attributes'
+         form:
+           fields:
+            - 'name'
+            - { property: 'data_type', type: 'choice', type_options: {required: true, choices: {'Text': 'string', 'Number': 'integer', 'Floating point number': 'numeric' }}}
+            - { property: 'input_type', type: 'choice', type_options: {required: true, choices: {'Text': 'text', 'Multi text': 'multiText','Select': 'select', 'Multi select': 'multiSelect'}}}
+            - { property: 'is_active', type: 'checkbox'}
+            - { property: 'values', type_options: {'disabled': true}}
+      AttributeValue:
+         class: App\Entity\AttributeValue
+         label: 'Attribute Values'
+         list:
+          fields: ['id', 'value', 'attribute']
+         form:
+           fields: ['value', 'attribute']

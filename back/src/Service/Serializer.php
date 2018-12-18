@@ -37,7 +37,7 @@ class Serializer
             'categories'  => ['id', 'title', 'parent-id', 'children'],
             'nodes'  => ['id', 'title'],
             'attributes' => ['id', 'name', 'attribute-values', 'data-type'],
-            'attribute_values' => ['id', 'value']
+            'attribute-values' => ['id', 'value']
         ]);
 
         return $encoder->withMeta($meta)->encodeData($data, $options);
