@@ -21,7 +21,7 @@ class Attribute
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\Regex("/^[a-zA-Z]+[0-9]*$/")
+     * @Assert\Regex("/^[a-z_]+[0-9]*$/")
      */
     protected $name;
 
@@ -138,7 +138,7 @@ class Attribute
 
     public function isMultiValues()
     {
-        return in_array($this->inputType, ['multiSelect', 'select', 'multiText']);
+        return in_array($this->inputType, ['multiSelect', 'multiText']);
     }
 
     public function isRelated()
@@ -146,6 +146,12 @@ class Attribute
         return in_array($this->inputType, ['multiSelect', 'select']);
     }
 
-
+    public function isNumeric()
+    {
+        return (!$this->isMultiValues() ||
+                $this->dataType == 'numeric' ||
+                $this->dataType == 'integer'
+        );
+    }
 }
 

@@ -73,7 +73,6 @@ class NodeAttributesType extends AbstractType
                             'by_reference' => false,
                         ));
                     } else {
-                        var_dump($currentValue);
                         $form->add($key, TextType::class, array(
                             'label' => $key,
                             'data' => $currentValue,

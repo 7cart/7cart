@@ -14,30 +14,30 @@
         {{#bs-accordion as |acc|}}
 
           {{#each attributes as |attribute|}}
-            {{#acc.item value=attribute.id as |aitem|}}
+            {{#acc.item value=attribute.id as |item|}}
 
-              {{#aitem.title}}
+              {{#item.title}}
                 {{attribute.name}}
-              {{/aitem.title}}
+              {{/item.title}}
 
-              {{#aitem.body }}
+              {{#item.body }}
 
                 {{#if attribute.isRange}}
                   {{elements/range-select name=attribute.name selectedFilter=selectedFilter onchange=(action 'filtering')}}
                 {{else}}
                   {{elements/multi-select-checkboxes
                     options=attribute.attributeValues
-                    selection=(get selectedFilter attribute.id)
+                    selection=(get selectedFilter attribute.name)
                     updateSelectionValue=false
                     labelProperty='value'
                     valueProperty='id'
-                    attributeId = attribute.id
+                    attributeId = attribute.name
                     isLoaded = nodes.isLoaded
-                    onchange=(action 'filtering' attribute.id)
+                    onchange=(action 'filtering' attribute.name)
                   }}
                 {{/if}}
 
-              {{/aitem.body}}
+              {{/item.body}}
 
             {{/acc.item}}
           {{/each}}
