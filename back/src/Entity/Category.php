@@ -13,13 +13,13 @@ class Category
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer", options={"default":"NEXTVAL('categories_id_seq')"})
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
      */
     protected $id;
 
     /**
-     * @ORM\Column(type="integer", name="parent_id")
+     * @ORM\Column(type="integer", name="parent_id", nullable=true)
      */
     protected $parentId;
 
@@ -35,7 +35,7 @@ class Category
     protected $parent;
 
      /**
-     * @ORM\Column(type="json_array", options={"jsonb": true}, nullable=true)
+     * @ORM\Column(type="json_array", options={"jsonb": true})
      */
     protected $title;
 
