@@ -20,7 +20,7 @@ class Node
     protected $id;
 
      /**
-     * @ORM\Column(type="json_array", options={"jsonb": true})
+     * @ORM\Column(type="json_array", options={"jsonb": true}, unique=true)
      */
     protected $title;
 
