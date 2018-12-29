@@ -38,6 +38,17 @@ easy_admin:
       Attribute:
          class: App\Entity\Attribute
          label: 'Attributes'
+         list:
+           fields:
+             - 'name'
+             - { property: 'data_type'}
+             - { property: 'input_type'}
+             - { property: 'is_active', type: 'checkbox'}
+             - { property: 'values', type_options: {'disabled': true}}
+           actions:
+               #- { name: 'show', label: '', icon: 'search' }
+             - { name: 'edit', label: '', icon: 'edit' }
+             - { name: 'delete', label: '', icon: 'trash' }
          form:
            fields:
             - 'name'
@@ -50,5 +61,9 @@ easy_admin:
          label: 'Attribute Values'
          list:
           fields: ['id', 'value', 'attribute']
+          actions:
+            #- { name: 'show', label: '', icon: 'search' }
+            - { name: 'edit', label: '', icon: 'edit' }
+            - { name: 'delete', label: '', icon: 'trash' }
          form:
            fields: ['value', 'attribute']
