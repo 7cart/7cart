@@ -3,13 +3,13 @@ easy_admin:
       Node:
         class: App\Entity\Node
         label: 'Products'
-        show:
-          fields: ['id', 'title', 'description', 'price', 'categories']
+       # show:
+        #  fields: ['id', 'title', 'description', 'price', 'categories']
         list:
           title: 'List of products'
           fields: ['id', 'title', 'description', 'price']
           actions:
-           - { name: 'show', label: '', icon: 'search' }
+          # - { name: 'show', label: '', icon: 'search' }
            - { name: 'edit', label: '', icon: 'edit' }
            - { name: 'delete', label: '', icon: 'trash' }
         form:
@@ -25,12 +25,12 @@ easy_admin:
         list:
           title: 'List of Categories'
           actions:
-            - { name: 'show', label: '', icon: 'search' }
+            #- { name: 'show', label: '', icon: 'search' }
             - { name: 'edit', label: '', icon: 'edit' }
             - { name: 'delete', label: '', icon: 'trash' }
           fields: ['id', 'title']
-        show:
-          fields: ['id', 'title', 'parent']
+        #show:
+         # fields: ['id', 'title', 'parent']
         form:
           fields:
           - { property: 'title', label: 'Title', type: 'App\Form\Type\LocaleKeyValueType' }
