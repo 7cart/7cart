@@ -14,7 +14,7 @@ class Node
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer", options={"default":"NEXTVAL('categories_id_seq')"})
+     * @ORM\Column(type="integer", options={"default":"NEXTVAL('nodes_id_seq')"})
      * @ORM\GeneratedValue(strategy="SEQUENCE")
      */
     protected $id;
