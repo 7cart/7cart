@@ -30,7 +30,7 @@ class AttributeValue
 
     /**
      * @ORM\ManyToOne(targetEntity="Attribute", inversedBy="values", fetch="EAGER")
-     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $attribute;
 

@@ -29,7 +29,7 @@ class Attribute
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="AttributeValue", mappedBy="attribute", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="AttributeValue", mappedBy="attribute", fetch="EAGER", cascade={"remove"}, orphanRemoval=true)
      */
     private $values;
 
