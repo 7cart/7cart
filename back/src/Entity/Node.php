@@ -14,13 +14,13 @@ class Node
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer", options={"default":"NEXTVAL('nodes_id_seq')"})
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
      */
     protected $id;
 
      /**
-     * @ORM\Column(type="json_array", options={"jsonb": true}, nullable=true)
+     * @ORM\Column(type="json_array", options={"jsonb": true}, unique=true)
      */
     protected $title;
 
@@ -30,7 +30,7 @@ class Node
     protected $description;
 
     /**
-     * @ORM\Column(type="json_array", options={"jsonb": true})
+     * @ORM\Column(type="json_array", options={"jsonb": true}, nullable=true)
      */
     protected $categoriesId;
 
