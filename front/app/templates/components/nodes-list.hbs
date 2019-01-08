@@ -1,15 +1,10 @@
-{{#unless nodes.isLoaded}}
-  <div class="text-center">
-    <div>Loading...</div>
-  </div>
-{{else}}
   {{#each nodes as |node|}}
     <div class="item  col-xs-6 col-sm-4 col-md-4 col-lg-2">
       <div class="thumbnail">
         <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
         <div class="caption">
           <h4 class="group inner list-group-item-heading">
-            {{node.title}}
+            {{node.title}}   # {{node.id}}
           </h4>
           <p class="group inner list-group-item-text">
             Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
@@ -27,8 +22,9 @@
       </div>
     </div>
   {{else}}
-    <div>Nothing to show.</div>
+    {{#if nodes.isFulfilled}}
+      <div>Nothing to show.</div>
+    {{/if}}
   {{/each}}
-{{/unless}}
 
 {{yield}}

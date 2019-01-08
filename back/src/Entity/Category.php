@@ -69,12 +69,6 @@ class Category
         return $this->parentId;
     }
 
-
-    public function setParentId($parentId): int
-    {
-        $this->parentId = $parentId;
-    }
-
     public function getTitle()
     {
         return $this->title;

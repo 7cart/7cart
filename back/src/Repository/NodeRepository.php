@@ -10,10 +10,10 @@ use Doctrine\ORM\Query\ResultSetMappingBuilder;
 class NodeRepository extends EntityRepository
 {
 
-    public function findNodesByCategory(int $catId, FilterCollection $filters)
+    private function buildNodesQuery($catId, $filters)
     {
         $con = $this->getEntityManager()->getConnection();
-        $sql = 'SELECT n.* FROM nodes as n';
+        $sql = '';
         $sqlArr = [];
 
         if ($catId) {
@@ -24,19 +24,42 @@ class NodeRepository extends EntityRepository
             $sqlArr[] = $filter->getSQLForAttribute($con);
         }
 
-        if ($sqlArr){
+        if ($sqlArr) {
             $sql .= ' WHERE ' . implode(" AND ", $sqlArr);
         }
+        return $sql;
+    }
 
-        $sql .= ' LIMIT 10' ;
+    public function findNodesByCategory(int $catId, FilterCollection $filters, int $page = 1, int $perPage = 10)
+    {
+        $page = abs($page);
+        $perPage = abs($perPage);
+
+        $sql = 'SELECT n.* FROM nodes as n';
+        $sql .= $this->buildNodesQuery($catId, $filters);
+
+        $sql .= ' LIMIT ' . (int)$perPage . ' OFFSET ' . ((int)$page - 1) * (int)$perPage;
 
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
-        $rsm->addRootEntityFromClassMetadata(Node::class , 'n');
+        $rsm->addRootEntityFromClassMetadata(Node::class, 'n');
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
         return $query->getResult();
     }
 
-    public function countNodesByCategory(int $catId, FilterCollection $filters, $attributes)
+    public function countNodesByCategory($catId, $filters)
+    {
+        $con = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT count(*) FROM nodes as n';
+        $sql .= $this->buildNodesQuery($catId, $filters);
+
+        $statement = $con->prepare($sql);
+        $statement->execute();
+        $res = $statement->fetch();
+
+        return (isset($res['count'])) ? $res['count'] : 0;
+    }
+
+    public function countAttributesByCategory(int $catId, FilterCollection $filters, $attributes)
     {
         $con = $this->getEntityManager()->getConnection();
         $sqlArr = [];
@@ -50,7 +73,7 @@ class NodeRepository extends EntityRepository
             $key = $attribute->getName();
             $localWhere = [];
             $localWhere[] = '(jsonb_exists(n.attributes, ' . $con->quote($key) . '))';
-            foreach($filters as $filter) {
+            foreach ($filters as $filter) {
                 if ($key == $filter->getAttribute()->getName()) {
                     continue;
                 }
@@ -62,15 +85,15 @@ class NodeRepository extends EntityRepository
                     n.attributes->>' . $con->quote($key) . ' as _val_id, 
                     count(n.attributes->>' . $con->quote($key) . ') as _count
                     FROM intersection n
-                    WHERE ' . implode(" AND ", $localWhere). '
+                    WHERE ' . implode(" AND ", $localWhere) . '
                     GROUP BY _val_id';
         }
 
-        if (empty($sqlArr)){
+        if (empty($sqlArr)) {
             return [];
         }
 
-        $sql.= 'SELECT (subq._attr_id)::VARCHAR as attr_id, 
+        $sql .= 'SELECT (subq._attr_id)::VARCHAR as attr_id, 
                 case when subq._val_id LIKE \'[%\'
                   then (jsonb_array_elements_text(subq._val_id::jsonb))
                   else subq._val_id

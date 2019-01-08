@@ -14,7 +14,6 @@ export default Service.extend({
     let sections = [];
     Object.keys(filterObj).forEach((key) => {
       let values = filterObj.get(key);
-      console.log(values);
       if (values) {
         if (values.hasOwnProperty('min') && values.hasOwnProperty('max')) {
           sections.push(key + '=' + values.min + '-' + values.max);

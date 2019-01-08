@@ -10,7 +10,6 @@ export default Helper.extend({
 
     if (this.get('filter.filterCounter')) {
       this.get('filter.filterCounter').some((i) => {
-        //console.log(valId, i['val_id'] , attrId , i['attr_id']);
           if (valId == i['val_id'] && attrId == i['attr_id']) {
             count = i['count'];
             return true;

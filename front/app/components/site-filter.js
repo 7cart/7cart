@@ -23,7 +23,11 @@ export default Component.extend({
     filtering(attrId, newValues) {
       this.get('selectedFilter').set(attrId, newValues);
       let newFilter = this.get('filter').toString(this.get('selectedFilter'));
-      this.get('router').transitionTo('category.filter', newFilter);
+      this.get('router').transitionTo('category.filter', newFilter, {
+        queryParams: {
+          page: 1
+        }
+      });
     }
   }
 });

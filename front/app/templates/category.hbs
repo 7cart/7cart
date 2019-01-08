@@ -4,16 +4,23 @@
   {{render-menu-level category=model}}
 
   <hr>
-
   <div class="container-fluid">
     <div class="row">
-      {{site-filter
-        attributes=model.attributes
-        nodes=model.nodes
-      }}
+      {{site-filter isLoaded=model.nodes.content._loadingMore}}
       <div>
         {{nodes-list nodes=model.nodes}}
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="text-center">
+      {{#if model.nodes.content.canLoadMore}}
+        {{load-more-button infinityModel=model.nodes}}
+      {{/if}}
+    </div>
+    <div class="text-center">
+      {{page-numbers infinityModel=model.nodes action=(route-action 'goToPage')}}
     </div>
   </div>
 

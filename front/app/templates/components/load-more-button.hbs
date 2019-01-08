@@ -1,0 +1,9 @@
+{{#if infinityModel.reachedInfinity}}
+  <button>{{loadedText}}</button>
+{{else}}
+  {{#if infinityModel.content._loadingMore}}
+    Loading...
+  {{else}}
+    <button type="button" class="btn btn-primary btn-lg" {{action 'loadMore'}}>{{loadText}}</button>
+  {{/if}}
+{{/if}}

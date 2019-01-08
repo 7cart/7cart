@@ -1,0 +1,12 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+  {{#each totalPages as |page|}}
+      <li class="page-item {{if (eq currentId  page) "active"}} {{if (eq page  '...') "disabled"}}">
+        <a href="#" class="page-link" {{action 'goto' page}}>
+          {{page}}
+        </a>
+      </li>
+  {{/each}}
+
+  </ul>
+</nav>

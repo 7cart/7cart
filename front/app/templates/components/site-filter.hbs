@@ -1,51 +1,43 @@
-  {{#if attributes}}
+{{#if filter.attributes}}
 
-    <div style="{{unless nodes.isLoaded "opacity: 0.7"}}">
+  <div style="{{if isLoaded "opacity: 0.7"}}">
     <div class="navbar navbar-default visible-xs">
       <div class="container-fluid">
-        {{#bs-button onClick=(action (mut collapsedSidebar) (if collapsedSidebar false true)) class="btn btn-default navbar-btn"}}
+        {{#bs-button onClick=(action (mut collapsedSidebar) (if collapsedSidebar false true))
+                     class="btn btn-default navbar-btn"}}
           <i class="fa fa-tasks"></i> Filter
         {{/bs-button}}
       </div>
     </div>
 
-    {{#bs-collapse collapsed=(if collapsedSidebar false true) class="col-xs-7 col-sm-3 visible-sm visible-md visible-lg collapse sliding-sidebar"}}
+    {{#bs-collapse collapsed=(if collapsedSidebar false true)
+                   class="col-xs-7 col-sm-3 visible-sm visible-md visible-lg collapse sliding-sidebar"}}
       <div>
-        {{#bs-accordion as |acc|}}
 
-          {{#each attributes as |attribute|}}
-            {{#acc.item value=attribute.id as |item|}}
+        {{#each filter.attributes as |attribute|}}
 
-              {{#item.title}}
-                {{attribute.name}}
-              {{/item.title}}
+          {{#accordion-item title=attribute.name}}
+            {{#if attribute.isRange}}
+              {{elements/range-select name=attribute.name selectedFilter=selectedFilter
+                                      onchange=(action 'filtering')}}
+            {{else}}
+              {{elements/multi-select-checkboxes
+                options=attribute.attributeValues
+                selection=(get selectedFilter attribute.name)
+                updateSelectionValue=false
+                labelProperty='value'
+                valueProperty='id'
+                attributeId = attribute.name
+                isLoaded = isLoaded
+                onchange=(action 'filtering' attribute.name)
+              }}
+            {{/if}}
+          {{/accordion-item}}
+        {{/each}}
 
-              {{#item.body }}
-
-                {{#if attribute.isRange}}
-                  {{elements/range-select name=attribute.name selectedFilter=selectedFilter onchange=(action 'filtering')}}
-                {{else}}
-                  {{elements/multi-select-checkboxes
-                    options=attribute.attributeValues
-                    selection=(get selectedFilter attribute.name)
-                    updateSelectionValue=false
-                    labelProperty='value'
-                    valueProperty='id'
-                    attributeId = attribute.name
-                    isLoaded = nodes.isLoaded
-                    onchange=(action 'filtering' attribute.name)
-                  }}
-                {{/if}}
-
-              {{/item.body}}
-
-            {{/acc.item}}
-          {{/each}}
-
-        {{/bs-accordion}}
       </div>
     {{/bs-collapse}}
-    </div>
-  {{/if}}
+  </div>
+{{/if}}
 
 {{yield}}

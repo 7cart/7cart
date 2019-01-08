@@ -24,19 +24,31 @@ class NodeController extends Controller
     public function index(Request $request)
     {
         $catId = $request->get('category_id', 0);
+        $pageNo = $request->get('page', 1);
+        $perPage = abs(1);
         $filters = $this->filterService->selectFiltersByString($request->get('f', ''));
         $allActiveAttr = $this->filterService->getAllActiveAttributesFromCategory($catId);
 
         $nodes = $this->getDoctrine()
             ->getRepository( Node::class)
-            ->findNodesByCategory($catId, $filters);
+            ->findNodesByCategory($catId, $filters, $pageNo, $perPage);
 
-        $counter = $this->getDoctrine()
+        $count = $this->getDoctrine()
             ->getRepository( Node::class)
-            ->countNodesByCategory($catId, $filters, $allActiveAttr);
+            ->countNodesByCategory($catId, $filters);
 
-        return new Response($this->get('7cart.serializer')->serialize($nodes,
-            ['filter-counter' => $counter,
-              'attributes' => json_decode($this->get('7cart.serializer')->serialize($allActiveAttr))]));
+        $meta = ['total_pages' => ceil($count/$perPage)];
+
+        if (!$request->get('event')) {
+            $meta['attributes'] = json_decode($this->get('7cart.serializer')->serialize($allActiveAttr));
+        }
+
+        if (!$request->get('event') || $request->get('event') == 'filter') {
+            $meta['filter-counter'] = $this->getDoctrine()
+                ->getRepository(Node::class)
+                ->countAttributesByCategory($catId, $filters, $allActiveAttr);
+        }
+
+        return new Response($this->get('7cart.serializer')->serialize($nodes, $meta));
     }
 }
