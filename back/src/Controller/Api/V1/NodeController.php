@@ -25,7 +25,7 @@ class NodeController extends Controller
     {
         $catId = $request->get('category_id', 0);
         $pageNo = $request->get('page', 1);
-        $perPage = abs(1);
+        $perPage = abs($request->get('per_page', 10));
         $filters = $this->filterService->selectFiltersByString($request->get('f', ''));
         $allActiveAttr = $this->filterService->getAllActiveAttributesFromCategory($catId);
 
