@@ -24,7 +24,7 @@ class Category
     protected $parentId;
 
     /**
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent", cascade={"remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent", cascade={"remove"})
      */
     protected $children;
 
