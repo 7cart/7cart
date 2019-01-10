@@ -31,10 +31,9 @@ class Filter
 
     public function getAllActiveAttributesFromCategory($catId)
     {
-        $sql = '
-            SELECT DISTINCT jsonb_object_keys(n.attributes) as key
+        $sql = 'SELECT DISTINCT jsonb_object_keys(n.attributes) as key
             FROM nodes n
-            WHERE n.categories_id @> :catId';
+            WHERE n.categories_id @> :catId AND jsonb_typeof(n.attributes) =\'object\'';
 
         $statement = $this->em->getConnection()->prepare($sql);
         $statement->bindValue('catId', $catId);
