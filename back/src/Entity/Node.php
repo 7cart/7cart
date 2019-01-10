@@ -14,8 +14,8 @@ class Node
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
 
@@ -127,9 +127,11 @@ class Node
     /**
      * @param mixed $attributes
      */
-    public function setAttributes($attributes): void
+    public function setAttributes($attributes)
     {
-        $this->attributes = $attributes;
+        if ($attributes) {
+            $this->attributes = $attributes;
+        }
     }
 
     public function getAttributes()

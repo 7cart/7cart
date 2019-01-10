@@ -16,7 +16,7 @@ class Version20180310151351 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SEQUENCE nodes_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE nodes (id INT NOT NULL, title JSONB NOT NULL, categories_id JSONB NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE nodes (id INT NOT NULL, title JSONB NOT NULL, description JSONB NOT NULL, categories_id JSONB NOT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN nodes.title IS \'(DC2Type:json_array)\'');
         $this->addSql('COMMENT ON COLUMN nodes.categories_id IS \'(DC2Type:json_array)\'');
     }

@@ -13,13 +13,13 @@ class Category
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
 
     /**
-     * @ORM\Column(type="integer", name="parent_id")
+     * @ORM\Column(type="integer", name="parent_id", nullable=true)
      */
     protected $parentId;
 
@@ -56,7 +56,7 @@ class Category
 
     public function getParent()
     {
-        return (isset($this->parent) && $this->parent->getId() > 0) ? $this->parent : null;
+        return $this->parent;
     }
 
     public function setParent($parent)
@@ -64,7 +64,7 @@ class Category
         $this->parent = $parent;
     }
 
-    public function getParentId(): int
+    public function getParentId()
     {
         return $this->parentId;
     }

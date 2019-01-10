@@ -6,6 +6,6 @@ export default DS.Model.extend({
   parentId:  DS.attr('string'),
   children: DS.hasMany('category', { inverse: null }),
   isTopLevel: computed('parentId', function() {
-    return (this.get('parentId') == 0);
+    return (!this.get('parentId'));
   })
 });
