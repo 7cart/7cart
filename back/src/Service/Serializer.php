@@ -21,6 +21,7 @@ class Serializer
     {
 
         $encoder = Encoder::instance([
+            'App\Entity\Attachment' => 'App\Serializer\Attachment',
             'App\Entity\Category' => 'App\Serializer\Category',
             'App\Entity\Node' => 'App\Serializer\Node',
             'App\Entity\Attribute' => 'App\Serializer\Attribute',
@@ -31,11 +32,13 @@ class Serializer
         ));
 
         $options = new EncodingParameters([
-             'attribute-values'
+             'attribute-values',
+             'attachments'
         ], [
             // Attributes and relationships that should be shown
             'categories'  => ['id', 'title', 'parent-id', 'children'],
-            'nodes'  => ['id', 'title'],
+            'nodes'  => ['id', 'title', 'attachments'],
+            'attachments'  => ['id', 'title', 'file-name'],
             'attributes' => ['id', 'name', 'attribute-values', 'data-type'],
             'attribute-values' => ['id', 'value']
         ]);

@@ -27,6 +27,6 @@ class Node extends BaseSchema
     public function getRelationships($data, bool $isPrimary, array $includeRelationships): ?array
     {
         /** @var NodeEntity $data */
-        return [];
+        return ['attachments' => [self::DATA => $data->getAttachments()]];
     }
 }

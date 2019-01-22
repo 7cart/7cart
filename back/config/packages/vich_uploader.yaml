@@ -1,0 +1,11 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        node_attachments:
+            uri_prefix: /images/products
+            namer: Vich\UploaderBundle\Naming\OrignameNamer
+            directory_namer:
+              service: vich_uploader.namer_directory_current_date_time
+              options: {date_time_property: uploadedAt, date_time_format: 'Y/d/m'}
+            upload_destination: '%kernel.project_dir%/public/images/products'

@@ -7,18 +7,26 @@ easy_admin:
           fields: ['id', 'title', 'description', 'price', 'categories']
         list:
           title: 'List of products'
-          fields: ['id', 'title', 'description', 'price']
+          fields:
+          - { property: 'firstImageName', type: 'image', template: 'image_in_list.html.twig'}
+          - { property: 'id' }
+          - { property: 'title' }
+          - { property: 'price' }
+          - { property: 'description' }
           actions:
            - { name: 'show', label: '', icon: 'search' }
            - { name: 'edit', label: '', icon: 'edit' }
            - { name: 'delete', label: '', icon: 'trash' }
         form:
           fields:
+            - { type: 'tab' , label: 'Basic Information' }
             - { property: 'title', type: 'App\Form\Type\LocaleKeyValueType'}
             - { property: 'description', type: 'App\Form\Type\LocaleKeyValueType'}
             - { property: 'categories', type: 'easyadmin_autocomplete', type_options:{multiple: true, class: 'App\Entity\Category'}}
-            - { type: 'group', css_class: 'col-sm-12' }
+            - { type: 'tab' , label: 'Attributes' }
             - { property: 'attributes', type: 'App\Form\Type\NodeAttributesType'}
+            - { type: 'tab' , label: 'Attachments' }
+            - { property: 'attachments', type: 'collection', type_options:{ entry_type: 'App\Form\Type\AttachmentImageType', by_reference: false}}
       Category:
         class: App\Entity\Category
         label: 'Categories'

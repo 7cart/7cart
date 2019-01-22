@@ -41,11 +41,42 @@ class Node
      * @ORM\Column(type="json_array", options={"jsonb": true}, nullable=true)
      */
     protected $attributes;
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Attachment", mappedBy="node", cascade={"persist", "remove"}, orphanRemoval=true, fetch="EAGER")
+     */
+    protected $attachments;
 
+
+    public function getFirstImage()
+    {
+        if ($this->attachments[0]){
+            return $this->attachments[0];
+        }
+        return new Attachment();
+    }
+
+    public function getFirstImageName()
+    {
+        if ($this->attachments[0]){
+            return $this->attachments[0]->getFileName();
+        }
+    }
+
+    /**
+     * Get attachments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAttachments()
+    {
+        return $this->attachments;
+    }
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->attachments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function setCategories($categories)
@@ -137,6 +168,20 @@ class Node
     public function getAttributes()
     {
         return $this->attributes;
+    }
+
+    public function addAttachment(Attachment $attachment)
+    {
+
+        $this->attachments->add($attachment);
+        $attachment->setNode($this);
+        return $attachment;
+    }
+
+    public function removeAttachment(Attachment $attachment)
+    {
+        $this->attachments->removeElement($attachment);
+        $attachment->setNode(null);
     }
 
 }
