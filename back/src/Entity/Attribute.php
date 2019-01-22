@@ -150,9 +150,8 @@ class Attribute
 
     public function isNumeric()
     {
-        return (!$this->isMultiValues() ||
-                $this->dataType == 'numeric' ||
-                $this->dataType == 'integer'
+        return (!($this->isMultiValues())&&
+            ($this->dataType == 'numeric' || $this->dataType == 'integer')
         );
     }
 }
