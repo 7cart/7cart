@@ -52,11 +52,11 @@ class FilterItem
 
                 $orClause = [];
                 if (isset($this->values['min'])) {
-                    $orClause[] = '(n.attributes->>\'' . $con->quoteIdentifier($attrId) . '\')::NUMERIC >= ' . floatval($this->values['min']);
+                    $orClause[] = '(n.attributes->>\'' . $attrId . '\')::NUMERIC >= ' . floatval($this->values['min']);
                 }
 
                 if (isset($this->values['max'])) {
-                    $orClause[] = '(n.attributes->>\'' . $con->quote($attrId) . '\')::NUMERIC <= ' . floatval($this->values['max']);
+                    $orClause[] = '(n.attributes->>\'' . $attrId . '\')::NUMERIC <= ' . floatval($this->values['max']);
                 }
 
                 if ($orClause) {
