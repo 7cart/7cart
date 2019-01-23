@@ -35,7 +35,7 @@ class Category
     protected $parent;
 
      /**
-     * @ORM\Column(type="json_array", options={"jsonb": true}, unique=true)
+     * @ORM\Column(type="json_array", options={"jsonb": true}, nullable=true)
      */
     protected $title;
 
