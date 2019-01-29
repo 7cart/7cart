@@ -39,7 +39,7 @@ class Serializer
             'categories'  => ['id', 'title', 'parent-id', 'children'],
             'nodes'  => ['id', 'title', 'attachments'],
             'attachments'  => ['id', 'title', 'file-name'],
-            'attributes' => ['id', 'name', 'attribute-values', 'data-type'],
+            'attributes' => ['id', 'name', 'attribute-values', 'is-multi-values', 'is-related', 'is-numeric',  'data-type'],
             'attribute-values' => ['id', 'value']
         ]);
 

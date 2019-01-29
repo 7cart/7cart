@@ -15,24 +15,27 @@
       <div>
 
         {{#each filter.attributes as |attribute|}}
-
-          {{#accordion-item title=attribute.name}}
-            {{#if attribute.isRange}}
-              {{elements/range-select name=attribute.name selectedFilter=selectedFilter
-                                      onchange=(action 'filtering')}}
+            {{#if attribute.isNumeric}}
+              {{#accordion-item title=attribute.name}}
+                  {{elements/range-select selection=(get selectedFilter attribute.name)
+                                      onchange=(action 'filtering' attribute.name)}}
+              {{/accordion-item}}
             {{else}}
-              {{elements/multi-select-checkboxes
-                options=attribute.attributeValues
-                selection=(get selectedFilter attribute.name)
-                updateSelectionValue=false
-                labelProperty='value'
-                valueProperty='id'
-                attributeId = attribute.name
-                isLoaded = isLoaded
-                onchange=(action 'filtering' attribute.name)
-              }}
+              {{#if attribute.isRelated}}
+                {{#accordion-item title=attribute.name}}
+                    {{elements/multi-select-checkboxes
+                      options=attribute.attributeValues
+                      selection=(get selectedFilter attribute.name)
+                      updateSelectionValue=false
+                      labelProperty='value'
+                      valueProperty='id'
+                      attributeId = attribute.name
+                      isLoaded = isLoaded
+                      onchange=(action 'filtering' attribute.name)
+                    }}
+                {{/accordion-item}}
+              {{/if}}
             {{/if}}
-          {{/accordion-item}}
         {{/each}}
 
       </div>

@@ -53,6 +53,11 @@ easy_admin:
             - { property: 'input_type', type: 'choice', type_options: {required: true, choices: {'Text': 'text', 'Multi text': 'multiText','Select': 'select', 'Multi select': 'multiSelect'}}}
             - { property: 'is_active', type: 'checkbox'}
             - { property: 'values', type_options: {'disabled': true}}
+         edit:
+          fields:
+             - { property: 'name', type_options: {'disabled': true}}
+             - { property: 'data_type', type_options: {'disabled': true}}
+             - { property: 'input_type', type_options: {'disabled': true}}
       AttributeValue:
          class: App\Entity\AttributeValue
          label: 'Attribute Values'

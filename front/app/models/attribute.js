@@ -5,7 +5,7 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   attributeValues:  DS.hasMany('attribute-value'),
   dataType: DS.attr('string'),
-  isRange: computed('dataType', function() {
-    return (this.get('dataType') == 'integer' || this.get('dataType') == 'float');
-  })
+  isMultiValues: DS.attr('boolean'),
+  isRelated: DS.attr('boolean'),
+  isNumeric: DS.attr('boolean')
 });

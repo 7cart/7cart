@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\CallbackTransformer;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -29,6 +30,22 @@ class NodeAttributesType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        $builder->addModelTransformer(new CallbackTransformer(
+            function ($attributes) {
+                return $attributes;
+            },
+            function ($attributes) {
+              //avoid null values
+               $res = [];
+               foreach ($attributes as $key => $attribute) {
+                   if ($attribute){
+                       $res[$key] = $attribute;
+                   }
+               }
+                return $res;
+            }
+        ));
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $fieldData = $event->getData();
@@ -73,6 +90,7 @@ class NodeAttributesType extends AbstractType
                         'data' => $currentValue,
                         'multiple' => $isMultiple,
                         'choices' => $choices,
+                        'required'   => false,
                     ));
                 } else {
                     if ($attribute->isMultiValues()) {

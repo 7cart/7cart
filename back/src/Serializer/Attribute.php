@@ -21,6 +21,9 @@ class Attribute extends BaseSchema
         /** @var AttributeEntity $data */
         return [
             'name' => $data->getName(),
+            'is-multi-values' => $data->isMultiValues(),
+            'is-related' => $data->isRelated(),
+            'is-numeric' => $data->isNumeric(),
             'data-type' => $data->getDataType()//$kernel->getContainer()->get('7cart.helper')->findRequestedTranslation($data->getTitle()),
         ];
     }
