@@ -18,9 +18,21 @@ const ExtendedInfinityModel = InfinityModel.extend({
   },
   afterInfinityModel(nodes) {
 
-    if (nodes.get('meta.attributes')) {
-      this.store.pushPayload(nodes.get('meta.attributes'));
-      this.get('filter').set('attributes', this.get('store').peekAll('attribute'));
+    if (nodes.get('meta.attributes.data')) {
+      let attrIds = [];
+
+      nodes.get('meta.attributes.data').forEach((item) => {
+        if (item.id){
+          attrIds.push(item.id);
+        }
+      });
+
+      this.get('filter').set('attributes',
+        this.store.peekAll('attribute').filter(
+          function(attr) {
+            return attrIds.includes(attr.get('id'));
+          })
+      );
     }
 
     if (nodes.get('meta.filter-counter')) {

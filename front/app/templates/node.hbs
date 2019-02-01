@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    {{site-breadcrumbs}}
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      {{#bs-carousel as |imgs| }}
+
+        {{#each model.attachments as |attachment| }}
+          {{#imgs.slide}}
+            <img alt="" src="{{attachment.fileName}}" />
+          {{/imgs.slide}}
+        {{/each}}
+
+      {{/bs-carousel}}
+    </div>
+    <div class="col-sm-6">
+      {{model.title}}
+    </div>
+  </div>
+  <div class="row" style="margin-top: 3rem;">
+    {{#bs-tab as |tab|}}
+      {{#tab.pane title="Description"}}
+        {{model.description}}
+        <div>Attributes:</div>
+        {{#each model.computedAttributes as |attribute| }}
+        <div> {{attribute.computedName}}: {{attribute.computedValue}} </div>
+        {{/each}}
+      {{/tab.pane}}
+    {{/bs-tab}}
+  </div>
+</div>
+{{outlet}}

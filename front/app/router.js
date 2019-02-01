@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('category', { path: '/category/:id/' }, function () {
     this.route('filter', {path: '/:filter/'});
   });
+  this.route('node', {path: 'node/:id/'});
 });
 
 export default Router;

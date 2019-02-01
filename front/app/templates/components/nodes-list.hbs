@@ -1,25 +1,27 @@
   {{#each nodes as |node|}}
     <div class="item  col-xs-6 col-sm-4 col-md-4 col-lg-2">
+      {{#link-to 'node' node}}
       <div class="thumbnail">
         <img class="group list-group-image" src="{{node.firstAttachmentURL}}" alt="" />
         <div class="caption">
           <h4 class="group inner list-group-item-heading">
-            {{node.title}}   # {{node.id}}
+            {{node.title}}
           </h4>
           <p class="group inner list-group-item-text">
-            Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+           {{node.description}}
+          </p>
           <div class="row">
             <div class="col-xs-12 col-md-6">
-              <p class="lead">
-                $21.000</p>
+              <!--<p class="lead">-->
+                <!--$21.000</p>-->
             </div>
-            <div class="col-xs-12 col-md-6">
-              <a class="btn btn-success" href="#">Add to cart</a>
-            </div>
+            <!--<div class="col-xs-12 col-md-6">-->
+              <!--<a class="btn btn-success" href="#">Add to cart</a>-->
+            <!--</div>-->
           </div>
         </div>
       </div>
+      {{/link-to}}
     </div>
   {{else}}
     {{#if nodes.isFulfilled}}

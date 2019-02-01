@@ -11,12 +11,24 @@ class CategoryController extends Controller
     /**
      * @Route("/categories", name="category_list")
      */
-    public function index()
+    public function list()
     {
         $categories = $this->getDoctrine()
             ->getRepository(\App\Entity\Category::class)
             ->findAll();
 
         return new Response($this->get('7cart.serializer')->serialize($categories));
+    }
+
+    /**
+     * @Route("/categories/{id}", name="category_show")
+     */
+    public function show($id)
+    {
+        $category = $this->getDoctrine()
+            ->getRepository(\App\Entity\Category::class)
+            ->findOneBy(['id' => $id]);
+
+        return new Response($this->get('7cart.serializer')->serialize($category));
     }
 }

@@ -21,6 +21,9 @@ class Node extends BaseSchema
         /** @var NodeEntity $data */
         return [
             'title' => $kernel->getContainer()->get('7cart.helper')->findRequestedTranslation($data->getTitle()),
+            'description' => $kernel->getContainer()->get('7cart.helper')->findRequestedTranslation($data->getDescription()),
+            'attributes' => $data->getAttributes(),
+            'categories-id' => $data->getCategoriesId()
         ];
     }
 

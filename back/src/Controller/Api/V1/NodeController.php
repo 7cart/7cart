@@ -21,7 +21,7 @@ class NodeController extends Controller
     /**
      * @Route("/nodes", name="node_list")
      */
-    public function index(Request $request)
+    public function list(Request $request)
     {
         $catId = $request->get('category_id', 0);
         $pageNo = $request->get('page', 1);
@@ -51,4 +51,24 @@ class NodeController extends Controller
 
         return new Response($this->get('7cart.serializer')->serialize($nodes, $meta));
     }
+
+    /**
+     *
+     * @Route("/nodes/{id}", name="node_show")
+     */
+    public function show($id)
+    {
+        $node = $this->getDoctrine()
+            ->getRepository( Node::class)
+            ->findOneBy(['id' => $id]);
+
+        $meta = [];
+        $allActiveAttr = $this->filterService->selectActiveAttributesByName(array_keys($node->getAttributes()));
+        if ($allActiveAttr) {
+            $meta['attributes'] = json_decode($this->get('7cart.serializer')->serialize($allActiveAttr));
+        }
+
+        return new Response($this->get('7cart.serializer')->serialize($node, $meta));
+    }
+
 }
