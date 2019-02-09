@@ -57,7 +57,8 @@ class Filter
     public function parseFilter(string $filterStr)
     {
         $filterArr = [];
-        $filterStr = str_replace('f_', '', strtolower($filterStr));
+        $filterStr = strtolower($filterStr);
+        $filterStr = preg_replace('/f_/', '', $filterStr, 1);
         if ($filterStr) {
             foreach (explode(';', $filterStr) as $section) {
                 if ($section) {
@@ -66,10 +67,9 @@ class Filter
                     $values = (isset($res[1])) ? $res[1] : null;
                     if ($attr && $values) {
                         $matches = null;
-                        preg_match('/(-*\d+)-(-*\d+)*/i', $values, $matches);
-                        // var_dump($matches); exit;
+                        preg_match('/(.+)_(.*)/i', $values, $matches);
                         if (count($matches) == 3) {
-                            $filterArr[$attr] = ["min" => $matches[1], "max" => $matches[2]];
+                            $filterArr[$attr] = ["min" => floatval($matches[1]), "max" => floatval($matches[2])];
                         } else {
                             $filterArr[$attr] = explode(',', $values);
                             $filterArr[$attr] = array_map(function ($element) {

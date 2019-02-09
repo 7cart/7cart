@@ -55,7 +55,7 @@ class FilterItem
                     $orClause[] = '(n.attributes->>' . $con->quote($attrId) . ')::NUMERIC >= ' . floatval($this->values['min']);
                 }
 
-                if (isset($this->values['max'])) {
+                if (isset($this->values['max']) && !empty($this->values['max'])) {
                     $orClause[] = '(n.attributes->>' . $con->quote($attrId) . ')::NUMERIC <= ' . floatval($this->values['max']);
                 }
 

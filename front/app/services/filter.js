@@ -16,7 +16,7 @@ export default Service.extend({
       let values = filterObj.get(key);
       if (values) {
         if (values.hasOwnProperty('min') && values.hasOwnProperty('max')) {
-          sections.push(key + '=' + values.min + '-' + values.max);
+          sections.push(key + '=' + values.min + '_' + values.max);
         } else if (values.length > 0) {
           sections.push(key + '=' + values.join(","));
         }
@@ -36,10 +36,10 @@ export default Service.extend({
         let [attr, values] = section.split('=');
         if (values && attr) {
           let attrId = attr;
-          let found = values.match(/(-*\d+)-(-*\d+)/i);
+          let found = values.match(/(.+)_(.*)/i);
           if (found) {
             if (found.length == 3) {
-              filterObj.set(attrId, A({"min": found[1] || 0, "max": found[2] || ''}));
+              filterObj.set(attrId, A({"min": parseFloat(found[1]) || 0, "max": parseFloat(found[2]) || ''}));
             }
           } else {
             filterObj.set(attrId, A(values.split(',').map((v) => {
