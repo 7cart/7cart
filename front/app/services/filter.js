@@ -4,6 +4,7 @@ import {A} from '@ember/array';
 export default Service.extend({
   init() {
     this.set('prefix', 'f_');
+    this.set('filterCounter', []);
   },
   cleanUp(filterObj) {
     Object.keys(filterObj).forEach((key) => {

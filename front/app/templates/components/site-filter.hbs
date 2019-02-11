@@ -1,6 +1,6 @@
 {{#if filter.attributes}}
 
-  <div style="{{if isLoaded "opacity: 0.7"}}">
+  <div style="{{if isLoading "opacity: 0.5"}}">
     <div class="navbar navbar-default visible-xs">
       <div class="container-fluid">
         {{#bs-button onClick=(action (mut collapsedSidebar) (if collapsedSidebar false true))
@@ -30,7 +30,8 @@
                       labelProperty='value'
                       valueProperty='id'
                       attributeId = attribute.name
-                      isLoaded = isLoaded
+                      isLoading = isLoading
+                      filterCounter = filter.filterCounter
                       onchange=(action 'filtering' attribute.name)
                     }}
                 {{/accordion-item}}

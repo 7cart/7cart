@@ -75,6 +75,9 @@ class NodeRepository extends EntityRepository
             $localWhere[] = '(jsonb_exists(n.attributes, ' . $con->quote($key) . '))';
             foreach ($filters as $filter) {
                 if ($key == $filter->getAttribute()->getName()) {
+                    if ($filter->getAttribute()->isMultiValues()) {
+                        $localWhere[] = ' NOT (' . $filter->getSQLForAttribute($con) . ') ';
+                    }
                     continue;
                 }
 

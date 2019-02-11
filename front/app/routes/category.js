@@ -3,7 +3,6 @@ import Route from '@ember/routing/route';
 import {inject as service} from '@ember/service';
 import {observer} from '@ember/object';
 import {on} from '@ember/object/evented';
-import { resolve } from 'rsvp';
 import { get } from '@ember/object';
 import InfinityModel from 'ember-infinity/lib/infinity-model';
 
@@ -39,10 +38,7 @@ const ExtendedInfinityModel = InfinityModel.extend({
       this.get('filter').set('filterCounter', nodes.get('meta.filter-counter'));
     }
 
-    return resolve(nodes).then((nodes) => {
-      this.set('firstLoad', true);
-      return nodes;
-    });
+    this.set('firstLoad', true);
   }
 });
 
@@ -70,23 +66,23 @@ export default Route.extend({
     let params = {
       'startingPage': get(transition, 'queryParams.page'),
       'category_id': model.get('id'),
+      'perPage': 10,
       'f': this.get('filter.filterStr')
     };
 
-    if (this.get('event')){
+    if (this.get('event')) {
       params['event'] = this.get('event');
+      this.set('event', null);
     }
 
     model.set('nodes', this.infinity.model('node', params , ExtendedInfinityModel));
-
-    this.set('event', null);
   },
   setupController(controller, model) {
     this.get('breadcrumbs').setCurrentCategory(model);
     this._super(controller, model);
   },
   actions:{
-    goToPage(pageNo){
+    goToPage(pageNo) {
       this.get('router').transitionTo('category.filter', {
         queryParams: {
           page: pageNo

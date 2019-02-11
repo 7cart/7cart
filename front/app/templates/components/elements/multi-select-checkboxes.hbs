@@ -3,9 +3,11 @@
       {{input type='checkbox' checked=checkbox.isSelected disabled=disabled}}
       {{checkbox.label}}
 
-    {{#if isLoaded}}
-     ({{filter-value-count checkbox.value attributeId}})
-    {{/if}}
+    {{#unless checkbox.isSelected}}
+      {{#unless isLoading}}
+       ({{#if isAnySelected}}+{{/if}}{{filter-value-count checkbox.value attributeId}})
+      {{/unless}}
+    {{/unless}}
 
   </div>
 {{/each}}

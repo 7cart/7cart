@@ -54,7 +54,10 @@ let Checkbox = EmberObject.extend({
 
 export default Component.extend({
 
-  checkboxes: computed('options.[]', 'labelProperty', 'valueProperty', 'selection', function () {
+  isAnySelected: computed('selection', function () {
+    return this.get('selection.length') > 0;
+  }),
+  checkboxes: computed('options.[]', 'labelProperty', 'valueProperty', 'selection', 'filterCounter', function () {
     let labelProperty = this.get('labelProperty');
     let valueProperty = this.get('valueProperty');
     let selection = A(this.get('selection'));
