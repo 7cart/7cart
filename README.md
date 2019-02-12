@@ -9,7 +9,6 @@ This repository is an open source e-commerce platform. It may be used as an onli
 
 #### Getting started
  * [Requirements][3]
- * [Installation][4] 
  * [Documentation][5]
 
 #### Contributing
@@ -26,7 +25,7 @@ We encourage everyone to file feature requests and bug reports using the project
 [2]:https://coussej.github.io/2016/01/14/Replacing-EAV-with-JSONB-in-PostgreSQL/
 [3]:https://github.com/7cart/7cart/wiki/Requirements
 [4]:https://github.com/7cart/7cart/wiki/Installation
-[5]:https://github.com/7cart/7cart/wiki/Documentation
+[5]:https://github.com/7cart/7cart/wiki
 [6]:https://github.com/7cart/7cart/wiki/Troubleshooting
 
 
