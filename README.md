@@ -4,18 +4,18 @@ It uses the concept of nodes that possess or reference categories, attributes an
 
 
 #### Technology stack
-Built as a Single Page Application (SPA) it utilises
-* Ember.js 3.3.2
-* Symfony 4.2.0
-* PostgreSQL 9.6
+Built as a Single Page Application (SPA) it utilises the latest
+* Ember.js
+* Symfony
+* PostgreSQL
 
-<img src="https://raw.githubusercontent.com/EasyCorp/EasyAdminBundle/master/doc/images/easyadmin-promo.png" alt="7cart admin screen" align="right" />
+<img src="https://user-images.githubusercontent.com/3994818/52748847-4357e100-2ff0-11e9-82bd-7f3b9bd101b8.png" alt="7cart admin screen" align="right" />
 
 #### Features
 * built in a Docker container, thus it can be quickly deployed and run on any system Docker supports;
 * the project database schema does not implement traditional [EAV][1] DB pattern, but a simpler [approach based on JSONB][2]
 * built-in Sidebare filter and filer counter
-* lightweight: uncompressed repo size 1.6 MB, memory consumption when idle: 14 MB back-end, and 11.8 MB front-end
+* lean and mean code: uncompressed repo size 1.6 MB, memory consumption when idle: 14 MB back-end, and 11.8 MB front-end
 
 #### Getting started
  * [Requirements][3]
