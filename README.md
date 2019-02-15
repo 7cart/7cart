@@ -1,21 +1,23 @@
-7cart is an open source project that may be furnished for use as an online store or a service oriented platform.
+7cart is a base project for building things like online stores, catalogs, service platforms and so on.
 
-It uses the concept of nodes that possess or reference categories, attributes and attribute values. This gives the project a wide application. For more explanation see [User Guide][7]
+It uses the concept of nodes that possess or reference categories, attributes and attribute values. This gives the project a wide application. See our [User Guide][7]
 
+<img src="https://user-images.githubusercontent.com/3994818/52857920-51f9e180-3131-11e9-8be2-21e76f4d55ac.png" align="right" />
 
 #### Technology stack
-Built as a Single Page Application (SPA) it utilises the latest
+Built as a Single Page Application (SPA) it utilises the latest possible
 * Ember.js
 * Symfony
 * PostgreSQL
 
-<img src="https://user-images.githubusercontent.com/3994818/52748847-4357e100-2ff0-11e9-82bd-7f3b9bd101b8.png" alt="7cart admin screen" align="right" />
-
 #### Features
-* built in a Docker container, thus it can be quickly deployed and run on any system Docker supports;
-* the project database schema does not implement traditional [EAV][1] DB pattern, but a simpler [approach based on JSONB][2]
-* built-in Sidebare filter and filer counter
-* lean and mean code: uncompressed repo size 1.6 MB, memory consumption when idle: 14 MB back-end, and 11.8 MB front-end
+* built in Docker,
+it can be quickly deployed and run on virtually any system;
+* the project DB schema does not implement [EAV][1],
+but the [approach based on JSONB][2], what gives:
+    * simpler and faster SQL queries
+    * compact, easy support code
+* built-in Product Filter and Filer Counter
 
 #### Getting started
  * [Requirements][3]
@@ -23,7 +25,7 @@ Built as a Single Page Application (SPA) it utilises the latest
 
 #### Contributing
 Contributions to 7cart are highly welcomed.
-We encourage everyone to file feature requests and bug reports using the project's
+We encourage everyone to file feature requests, bug reports or desire to contribute using the project's
 [issue tracker](https://github.com/7cart/7cart/issues).
 
 #### Getting help
