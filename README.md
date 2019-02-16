@@ -7,8 +7,9 @@ It uses the concept of nodes that possess or reference categories, attributes an
 #### Technology stack
 Built as a Single Page Application (SPA) it utilises the latest possible
 * Ember.js
-* Symfony
+* Symfony 4
 * PostgreSQL
+* PHP 7
 
 #### Features
 * built in Docker,
@@ -24,8 +25,7 @@ but the [approach based on JSONB][2], what gives:
  * [Documentation][5]
 
 #### Contributing
-Contributions to 7cart are highly welcomed.
-We encourage everyone to file feature requests, bug reports or desire to contribute using the project's
+We encourage to file feature requests, bug reports or desire to contribute using the project's
 [issue tracker](https://github.com/7cart/7cart/issues).
 
 #### Getting help
