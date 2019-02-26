@@ -6,6 +6,8 @@ The project is aimed to be FREE OF
 - complicated database schema,
 while being faster than the existinting platforms.
 
+<img src="https://user-images.githubusercontent.com/3994818/52857920-51f9e180-3131-11e9-8be2-21e76f4d55ac.png" align="right" />
+
 #### How is this achieved?
 The project DB schema doesn't implement [EAV][1],
 but the [approach based on JSONB type][2],
@@ -13,8 +15,6 @@ what gives
 * less relations in a database,
 * simpler SQL queries,
   speed up with [GIN indexes][8]
-
-<img src="https://user-images.githubusercontent.com/3994818/52857920-51f9e180-3131-11e9-8be2-21e76f4d55ac.png" align="right" />
 
 #### Technology stack
 Built as a Single Page Application (SPA),
