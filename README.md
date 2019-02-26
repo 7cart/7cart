@@ -7,7 +7,7 @@ The project is aimed to be FREE OF
 - bloated, hard to figure out code,
 - complicated database schema,
 
-while being faster than the existinting platforms.
+while being faster than the existing platforms.
 
 #### How is this achieved?
 The project DB schema doesn't implement [EAV][1],
