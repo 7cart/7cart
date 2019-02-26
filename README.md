@@ -1,7 +1,5 @@
 7cart is a base project for building things like online stores, catalogs or service platforms.
 
-<img src="https://user-images.githubusercontent.com/3994818/52857920-51f9e180-3131-11e9-8be2-21e76f4d55ac.png" align="right" />
-
 #### How it differs? 
 The project is aimed to be FREE OF
 - bloated, hard to figure out code,
@@ -11,10 +9,12 @@ while being faster than the existinting platforms.
 #### How is this achieved?
 The project DB schema doesn't implement [EAV][1],
 but the [approach based on JSONB type][2],
-what gives:
-    * less relations in a database,
-    * simpler SQL queries,
-      speed up by [GIN indexes][8]
+what gives
+* less relations in a database,
+* simpler SQL queries,
+  speed up with [GIN indexes][8]
+
+<img src="https://user-images.githubusercontent.com/3994818/52857920-51f9e180-3131-11e9-8be2-21e76f4d55ac.png" align="right" />
 
 #### Technology stack
 Built as a Single Page Application (SPA),
