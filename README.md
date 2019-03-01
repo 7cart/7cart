@@ -31,7 +31,7 @@ it can be quickly deployed and run on virtually any system;
 * built-in Product Filter and Filer Counter
 
 #### Getting started
- * [Requirements][3]
+ * [Installation][4]
  * [Documentation][5]
 
 #### Contributing
