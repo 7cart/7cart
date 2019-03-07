@@ -1,10 +1,10 @@
-7cart is a base project for building things like online stores, catalogs or service platforms.
+7cart is a base project for building online shops, catalogs or service platforms. It's a new, better alternative to Shopify and Magento.
 
 <img src="https://user-images.githubusercontent.com/3994818/52857920-51f9e180-3131-11e9-8be2-21e76f4d55ac.png" align="right" />
 
-#### How it differs? 
-The project is aimed to be FREE OF
-- bloated, hard to figure out code,
+#### How is it different? 
+The project is FREE OF
+- spaghetti code,
 - complicated database schema,
 
 while being faster than the existing platforms.
@@ -27,20 +27,21 @@ it utilises the latest possible
 
 #### Features
 * built in Docker,
-it can be quickly deployed and run on virtually any system;
+it can be quickly deployed and run on different OSs;
 * built-in Product Filter and Filer Counter
 
 #### Getting started
  * [Installation][4]
  * [Documentation][5]
 
-#### Contributing
-We encourage everyone, to file feature requests, bug reports or desire to contribute using the project's
+#### Feedback
+We'd like to hear from you! Please, leave feature requests, bug reports or desire to contribute in the
 [issue tracker](https://github.com/7cart/7cart/issues).
 
-#### Getting help
+#### Help
 1. check the [Troubleshooting][6] section;
-2. raise an issue.
+2. raise an issue in the [issue tracker](https://github.com/7cart/7cart/issues).
+
 
 
 [1]:https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model
@@ -51,5 +52,3 @@ We encourage everyone, to file feature requests, bug reports or desire to contri
 [6]:https://github.com/7cart/7cart/wiki/Troubleshooting
 [7]:https://github.com/7cart/7cart/wiki/User-Guide
 [8]:https://www.postgresql.org/docs/11/datatype-json.html#JSON-INDEXING
-
-
