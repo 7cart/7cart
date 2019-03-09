@@ -10,12 +10,11 @@ The project is FREE OF
 while being faster than the existing platforms.
 
 #### How is this achieved?
-The project DB schema doesn't implement [EAV][1],
-but the [approach based on JSONB type][2],
+The project DB schema doesn't implement EAV,
+but the approach based on JSONB type,
 what gives
 * less relations in a database,
-* simpler SQL queries,
-  speed up with [GIN indexes][8]
+* simpler SQL queries
 
 #### Technology stack
 Built as a Single Page Application (SPA),
