@@ -35,17 +35,17 @@ services:
         - ./nginx/vhost.conf:/bitnami/nginx/conf/vhosts/7cart.conf
         - ../back/public/:/app/public
   postgresql:
-    image: 'bitnami/postgresql:9.6'
+    image: 'postgres:11'
     ports:
       - 5438:5432
     volumes:
-      - ./data/postgres:/bitnami
+      - ./data/postgres:/var/lib
     networks:
       - app-tier
     environment:
-          - POSTGRESQL_USERNAME=scart
-          - POSTGRESQL_PASSWORD=scart
-          - POSTGRESQL_DATABASE=scart
+          - POSTGRES_USER=scart
+          - POSTGRES_PASSWORD=scart
+          - POSTGRES_DB=scart
   nodejs:
       image: 'bitnami/node:8'
       command: "sh -c 'npm install --unsafe && ./node_modules/ember-cli/bin/ember serve'"
