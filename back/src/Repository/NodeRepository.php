@@ -98,7 +98,7 @@ class NodeRepository extends EntityRepository
 
         $sql .= 'SELECT (subq._attr_id)::VARCHAR as attr_id, 
                 case when subq._val_id LIKE \'[%\'
-                  then (jsonb_array_elements_text(subq._val_id::jsonb))
+                  then (SELECT jsonb_array_elements_text(subq._val_id::jsonb))
                   else subq._val_id
                 end as val_id, 
                 SUM(subq._count) as count 
