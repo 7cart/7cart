@@ -85,8 +85,14 @@ class NodeRepository extends EntityRepository
             }
 
             $sqlArr[] = 'SELECT ' . $con->quote($key) . '  as _attr_id, 
-                    n.attributes->>' . $con->quote($key) . ' as _val_id, 
-                    count(n.attributes->>' . $con->quote($key) . ') as _count
+                     case  jsonb_typeof(n.attributes->' . $con->quote($key) . ')
+                     when \'array\'
+                     then 
+                        n.attributes->' . $con->quote($key) . ' 
+                     else 
+                        jsonb_build_array(n.attributes->' . $con->quote($key) . ')
+                     end as _val_id,
+                    count(n.attributes->' . $con->quote($key) . ') as _count
                     FROM intersection n
                     WHERE ' . implode(" AND ", $localWhere) . '
                     GROUP BY _val_id';
@@ -97,10 +103,7 @@ class NodeRepository extends EntityRepository
         }
 
         $sql .= 'SELECT (subq._attr_id)::VARCHAR as attr_id, 
-                case when subq._val_id LIKE \'[%\'
-                  then (SELECT jsonb_array_elements_text(subq._val_id::jsonb))
-                  else subq._val_id
-                end as val_id, 
+                jsonb_array_elements_text(subq._val_id) as val_id, 
                 SUM(subq._count) as count 
                 FROM (' . implode(" UNION ", $sqlArr) . ') as subq 
                 GROUP BY attr_id, val_id';
