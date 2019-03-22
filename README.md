@@ -2,6 +2,7 @@
 
 #### Live demo
 [Front-end page][9]
+
 [Admin page][10]
 
 <img src="https://user-images.githubusercontent.com/3994818/52857920-51f9e180-3131-11e9-8be2-21e76f4d55ac.png" align="right" />
