@@ -1,4 +1,6 @@
-7cart is a base project for building online shops, catalogs or service platforms. 7cart is written with simple code and simple database. It is easy to support and fast.
+7cart is a base project for building online shops, catalogs or service platforms. 7cart is written with simple code and simple database schema. It is easy to support and fast.
+
+[Live demo][9]
 
 <img src="https://user-images.githubusercontent.com/3994818/52857920-51f9e180-3131-11e9-8be2-21e76f4d55ac.png" align="right" />
 
@@ -25,7 +27,9 @@ it utilises the latest possible
 #### Features
 * built in Docker,
 it can be quickly deployed and run on different OSs;
-* built-in Product Filter and Filer Counter
+* built-in Product Filters and Filer Counters
+
+[Live demo][9]
 
 #### Getting started
  * [Installation][4]
@@ -34,19 +38,17 @@ it can be quickly deployed and run on different OSs;
 #### Download
 [Download Zip with project source code.](https://github.com/7cart/7cart/archive/master.zip)
 
-#### Feedback
-We'd like to hear from you!
-
-Please, leave feature requests, bug reports or desire to contribute in the
+#### Tell us what you think!
+Please, leave your thoughts in the
 [issue tracker](https://github.com/7cart/7cart/issues)
 
-or message to [7cart facebook page]( https://www.facebook.com/7cart)
+or message to [7cart Facebook page]( https://www.facebook.com/7cart)
 
 #### Help
 1. check the [Troubleshooting][6] section;
 2. raise an issue in the [issue tracker](https://github.com/7cart/7cart/issues)
 
-or message to [7cart facebook page]( https://www.facebook.com/7cart)
+or message to [7cart Facebook page]( https://www.facebook.com/7cart)
 
 
 
@@ -58,3 +60,4 @@ or message to [7cart facebook page]( https://www.facebook.com/7cart)
 [6]:https://github.com/7cart/7cart/wiki/Troubleshooting
 [7]:https://github.com/7cart/7cart/wiki/User-Guide
 [8]:https://www.postgresql.org/docs/11/datatype-json.html#JSON-INDEXING
+[9]:http://35.204.41.32:4200/category/1
