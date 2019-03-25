@@ -1,9 +1,9 @@
 7cart is a base project for building online shops, catalogs or service platforms. 7cart is written with simple code and simple database schema. It is easy to support and fast.
 
 #### Live demo
-[Front-end page][9]
+[Live store front-end page][9]
 
-[Admin page][10]
+[Live store admin page][10]
 
 <img src="https://user-images.githubusercontent.com/3994818/52857920-51f9e180-3131-11e9-8be2-21e76f4d55ac.png" align="right" />
 
@@ -13,11 +13,11 @@ and complicated database schema,
 while being faster than the existing platforms.
 
 #### How is this achieved?
-The project DB schema doesn't implement EAV,
-but the approach based on PostgreSQL JSONB type,
-what gives
+The project db schema doesn't implement [Entity-Attribute-Value table][1],
+but the Entity table with [JSONB][8] columns.
+That gives:
 * less relations and simple code
-* simpler and faster SQL queries
+* simpler and faster SQL queries [[proof link][2]]
 
 #### Technology stack
 Built as a Single Page Application (SPA),
@@ -54,6 +54,6 @@ or message to [7cart Facebook page]( https://www.facebook.com/7cart)
 [5]:https://github.com/7cart/7cart/wiki
 [6]:https://github.com/7cart/7cart/wiki/Troubleshooting
 [7]:https://github.com/7cart/7cart/wiki/User-Guide
-[8]:https://www.postgresql.org/docs/11/datatype-json.html#JSON-INDEXING
+[8]:https://www.postgresql.org/docs/11/datatype-json.html
 [9]:http://35.204.41.32:4200/category/1
 [10]:http://35.204.41.32:8000/admin
