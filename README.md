@@ -5,19 +5,27 @@
 
 [Live store admin page][10]
 
+:star: Star us on GitHub — it helps!
+
 <img src="https://user-images.githubusercontent.com/3994818/52857920-51f9e180-3131-11e9-8be2-21e76f4d55ac.png" align="right" />
 
-#### How is 7cart different? 
-The project is FREE OF spaghetti code
-and complicated database schema, 
-while being faster than the existing platforms.
+#### Why 7cart?
+7cart has been being developed, for building projects that can't be built with the existing e-commerce platforms. It solves the following problems:
+* the difficult to support code
+* the hard to understand code and database schema
+* long response time
 
-#### How is this achieved?
-The project db schema doesn't implement [Entity-Attribute-Value table][1],
+#### How is 7cart better?
+The project database doesn't implement [EAV][1] table,
 but the Entity table with [JSONB][8] columns.
 That gives:
 * less relations and simple code
 * simpler and faster SQL queries [[proof link][2]]
+
+#### Features
+* built in Docker,
+it can be quickly deployed and run on different OSs;
+* built-in Product Filters and Filer Counters
 
 #### Technology stack
 Built as a Single Page Application (SPA),
@@ -26,11 +34,6 @@ it utilises the latest possible
 * Symfony 4
 * PostgreSQL
 * PHP 7
-
-#### Features
-* built in Docker,
-it can be quickly deployed and run on different OSs;
-* built-in Product Filters and Filer Counters
 
 #### Getting started
  * [Installation][4]
