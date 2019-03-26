@@ -1,6 +1,6 @@
 7cart is a base project for building online shops, catalogs or service platforms. 7cart is written with simple code and simple database schema. It is easy to support and fast.
 
-#### Live demo
+#### Play with live demo!
 [Live store front-end page][9]
 
 [Live store admin page][10]
@@ -9,11 +9,14 @@
 
 <img src="https://user-images.githubusercontent.com/3994818/52857920-51f9e180-3131-11e9-8be2-21e76f4d55ac.png" align="right" />
 
+#### Try it!
+ * [Installation][4]
+ * [Documentation][5]
+
 #### Why 7cart?
-7cart has been being developed, for building projects that can't be built with the existing e-commerce platforms. It solves the following problems:
-* the difficult to support code
-* the hard to understand code and database schema
-* long response time
+7cart is for building projects that can't be built with the existing e-commerce platforms. It aims to be free of:
+* difficult to support code and database
+* slow requests
 
 #### How is 7cart better?
 The project database doesn't implement [EAV][1] table,
@@ -34,10 +37,6 @@ it utilises the latest possible
 * Symfony 4
 * PostgreSQL
 * PHP 7
-
-#### Getting started
- * [Installation][4]
- * [Documentation][5]
  
 #### Download
 [Download Zip with project source code.](https://github.com/7cart/7cart/archive/master.zip)
