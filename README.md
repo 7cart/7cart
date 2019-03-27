@@ -41,9 +41,8 @@ it utilises the latest possible
 #### Download
 [Download Zip with project source code.](https://github.com/7cart/7cart/archive/master.zip)
 
-#### Tell us what you think!
-Please, leave your thoughts in the
-[issue tracker](https://github.com/7cart/7cart/issues)
+#### What do you think of this?
+Tell us in the [issue tracker](https://github.com/7cart/7cart/issues)
 
 or message to [7cart Facebook page]( https://www.facebook.com/7cart)
 
