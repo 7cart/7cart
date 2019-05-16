@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import {observer} from '@ember/object';
 
 export default Component.extend({
   totalPages: 0,
@@ -36,7 +35,7 @@ export default Component.extend({
   },
   init() {
     this._super(...arguments);
-    this.get('infinityModel').then((im) => {
+    this.get('infinityModel').then(() => {
       this.pageDidChange();
       this.addObserver('infinityModel.content.currentPage', this, 'pageDidChange');
     });

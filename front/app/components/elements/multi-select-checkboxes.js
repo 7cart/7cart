@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import {computed, observer} from '@ember/object';
+import {computed} from '@ember/object';
 import EmberObject from '@ember/object';
 import {A} from '@ember/array';
 

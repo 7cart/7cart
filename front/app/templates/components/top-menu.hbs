@@ -8,7 +8,7 @@
       {{#each categories as |category|}}
         {{#if category.isTopLevel}}
           {{#nav.item}}
-            {{#nav.link-to "category" category active=(in-breadcrumbs category.id)}}
+            {{#nav.link-to "category" category current-when=(in-breadcrumbs category.id)}}
               {{category.title}}
             {{/nav.link-to}}
           {{/nav.item}}
