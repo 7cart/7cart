@@ -1,7 +1,8 @@
 import DS from 'ember-data';
+import config from 'front/config/environment';
 
 export default DS.JSONAPIAdapter.extend({
-  host: 'http://localhost:8000',
+  host: config.APP.backendHost,
   namespace: 'api/v1',
   headers: {
     'Accept-Language':'en'

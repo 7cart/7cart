@@ -35,10 +35,10 @@ class FilterItem
 
             $orClause = [];
             foreach ($this->values as $value) {
-                if ($this->getAttribute()->isMultiValues()){
-                    $orClause[] = 'n.attributes @> \'{' . $con->quoteidentifier($attrId) . ':[' . (int)$value . ']}\'';
+                if ($this->getAttribute()->isMultiValues()) {
+                    $orClause[] = 'n.attributes @> \'{' . $con->quoteIdentifier($attrId) . ':[' . (int)$value . ']}\'';
                 } else {
-                    $orClause[] = 'n.attributes @> \'{' . $con->quoteidentifier($attrId) . ':' . (int)$value . '}\'';
+                    $orClause[] = 'n.attributes @> \'{' . $con->quoteIdentifier($attrId) . ':' . (int)$value . '}\'';
                 }
             }
 

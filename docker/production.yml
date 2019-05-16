@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  phpfpm:
+    environment:
+      - APP_ENV=prod
+      - DATABASE_URL=pgsql://scart:scart@postgresql:5432/scart
+      - CORS_ALLOW_ORIGIN=^https?://7cart.front.local:?[0-9]*$$
+    volumes:
+      - ../back/var/logs:/app/var/logs
+      - ../back/var/cache:/app/var/cache
+  nginx:
+    volumes:
+      - ./nginx/vhost-front.conf:/bitnami/nginx/conf/vhosts/7cart-front.conf
+      - ./nginx/vhost.conf:/bitnami/nginx/conf/vhosts/7cart.conf
+      - ../back/public/:/app/public
+      - ../front/dist/:/app/public/front/
+    ports:
+      - 80:8000
+  nodejs:
+    image: 'bitnami/node:8'
+    command: "sh -c 'npm install --unsafe && ./node_modules/ember-cli/bin/ember build --environment=production'"
