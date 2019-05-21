@@ -2,6 +2,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    mailer_user_address: 'admin'
+    mailer_user_name: 'admin@admin.com'
 
 services:
     # default configuration for services in *this* file

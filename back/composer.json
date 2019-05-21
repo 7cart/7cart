@@ -6,6 +6,7 @@
         "ext-iconv": "*",
         "doctrine/annotations": "^1.6",
         "easycorp/easyadmin-bundle": "^1.17",
+        "friendsofsymfony/user-bundle": "~2.1",
         "nelmio/cors-bundle": "^1.5",
         "neomerx/json-api": "^2.0",
         "opsway/doctrine-dbal-postgresql": "^0.8.0",
@@ -31,6 +32,7 @@
         "vich/uploader-bundle": "^1.8"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.1",
         "symfony/browser-kit": "^4.0",
         "symfony/css-selector": "^4.0",
         "symfony/dotenv": "^4.0",

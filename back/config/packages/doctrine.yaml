@@ -9,7 +9,7 @@ doctrine:
     dbal:
         # configure these for your database server
         driver: 'pdo_pgsql'
-        server_version: '9.6'
+        server_version: '11'
         charset: utf8
         mapping_types:
             jsonb: json_array
