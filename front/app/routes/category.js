@@ -64,7 +64,7 @@ export default Route.extend({
     }
 
     let params = {
-      'startingPage': get(transition, 'queryParams.page'),
+      'startingPage': get(transition, 'to.queryParams.page'),
       'category_id': model.get('id'),
       'perPage': 10,
       'f': this.get('filter.filterStr')

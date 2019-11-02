@@ -3,6 +3,7 @@ import {A} from '@ember/array';
 
 export default Service.extend({
   init() {
+    this._super(...arguments);
     this.set('prefix', 'f_');
     this.set('filterCounter', []);
   },

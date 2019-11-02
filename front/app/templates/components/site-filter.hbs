@@ -1,6 +1,6 @@
 {{#if filter.attributes}}
 
-  <div style="{{if isLoading "opacity: 0.5"}}">
+  <div style="{{if isLoading (html-safe "opacity: 0.5")}}">
     <div class="navbar navbar-default visible-xs">
       <div class="container-fluid">
         {{#bs-button onClick=(action (mut collapsedSidebar) (if collapsedSidebar false true))
