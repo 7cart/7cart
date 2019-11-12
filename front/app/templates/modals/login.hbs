@@ -1,0 +1,7 @@
+{{#modal-dialog  translucentOverlay=true onClose=(route-action 'closeModal')}}
+  <div style="text-align: right">
+    <i class="fa fa-window-close" aria-hidden="true" {{action (route-action 'closeModal')}}>X</i>
+  </div>
+  {{login-form}}
+
+{{/modal-dialog}}

@@ -1,0 +1,10 @@
+fos_oauth_server:
+    db_driver: orm
+    client_class:        App\Entity\OAuth2\Client
+    access_token_class:  App\Entity\OAuth2\AccessToken
+    refresh_token_class: App\Entity\OAuth2\RefreshToken
+    auth_code_class:     App\Entity\OAuth2\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username_email
+        options:
+            access_token_lifetime: 10

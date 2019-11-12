@@ -9,7 +9,7 @@ export default DS.Model.extend({
   attachments: DS.hasMany('attachment'),
   categoriesId: DS.attr('jsonb'),
   firstCategoryId: computed('categoriesId', function() {
-    return this.get('categoriesId.firstObject');
+    return this.get('categoriesId.firstObject') || 0;
   }),
   firstAttachmentURL: computed('attachments', function() {
     let fo = this.get('attachments.firstObject');

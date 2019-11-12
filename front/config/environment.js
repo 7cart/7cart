@@ -18,9 +18,13 @@ module.exports = function(environment) {
     },
 
     APP: {
-      backendHost: 'http://localhost:8000'
+      backendHost: 'http://localhost:8000',
+      backendDockerHost: 'http://nginx:8000',
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+    fastboot: {
+      hostWhitelist: [/^127.0.0.1:\d+$/, /^localhost:\d+$/]
     }
   };
 

@@ -3,7 +3,7 @@
     {{navbar.toggle}}
     {{#link-to "index" class="navbar-brand"}}Brand{{/link-to}}
   </div>
-  {{#navbar.content}}
+  {{#navbar.content id="navbarSupportedContent"}}
     {{#navbar.nav as |nav|}}
       {{#each categories as |category|}}
         {{#if category.isTopLevel}}
@@ -15,7 +15,22 @@
         {{/if}}
       {{/each}}
     {{/navbar.nav}}
+
+    <ul class="nav navbar-nav navbar-right">
+      {{#if session.isAuthenticated}}
+        {{currentUser.user.userName}}
+        <button {{action 'invalidateSession'}}>Logout</button>
+      {{else}}
+        <li>
+          <div class="navbar-form">
+            <button type="button" class="btn btn-default" {{action (route-action 'openModal' 'login')}}>Login</button>
+          </div>
+        </li>
+      {{/if}}
+    </ul>
+
   {{/navbar.content}}
 {{/bs-navbar}}
+
 
 {{yield}}

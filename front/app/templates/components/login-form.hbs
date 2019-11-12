@@ -1,0 +1,12 @@
+{{#if errorMessage}}
+  <p>{{errorMessage}}</p>
+{{/if}}
+
+<BsForm @formLayout="vertical" @model={{this}} @onSubmit={{action "authenticate"}} as |form|>
+  <form.element @controlType="email" @label="Email" @placeholder="Email" @property="identification" @required={{true}} />
+  <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" @required={{true}} @helpText="Minimum 6 characters" />
+  <form.element @controlType="checkbox" @label="Checkbox" @property="checkbox" />
+  <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+</BsForm>
+
+{{yield}}

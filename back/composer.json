@@ -6,6 +6,7 @@
         "ext-iconv": "*",
         "doctrine/annotations": "^1.6",
         "easycorp/easyadmin-bundle": "^1.17",
+        "friendsofsymfony/oauth-server-bundle": "1.6.2",
         "friendsofsymfony/user-bundle": "~2.1",
         "nelmio/cors-bundle": "^1.5",
         "neomerx/json-api": "^2.0",

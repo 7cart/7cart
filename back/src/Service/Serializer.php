@@ -26,6 +26,8 @@ class Serializer
             'App\Entity\Node' => 'App\Serializer\Node',
             'App\Entity\Attribute' => 'App\Serializer\Attribute',
             'App\Entity\AttributeValue' => 'App\Serializer\AttributeValue',
+            'Proxies\__CG__\App\Entity\User' => 'App\Serializer\User',
+            'App\Entity\User' => 'App\Serializer\User',
         ], new EncoderOptions(
             JSON_PRETTY_PRINT,
             $this->requestStack->getCurrentRequest()->getUriForPath('/api/v1')
@@ -40,7 +42,8 @@ class Serializer
             'nodes'  => ['id', 'title', 'attachments', 'description', 'attributes', 'categories-id'],
             'attachments'  => ['id', 'title', 'file-name'],
             'attributes' => ['id', 'name', 'attribute-values', 'is-multi-values', 'is-related', 'is-numeric',  'data-type'],
-            'attribute-values' => ['id', 'value']
+            'attribute-values' => ['id', 'value'],
+            'users' => ['id', 'user-name']
         ]);
 
         return $encoder->withMeta($meta)->encodeData($data, $options);

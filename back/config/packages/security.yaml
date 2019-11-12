@@ -11,6 +11,11 @@ security:
             id: fos_user.user_provider.username
 
     firewalls:
+        api:
+            pattern:    ^/api
+            fos_oauth:  true
+            stateless:  true
+            anonymous:  true
         main:
             pattern: ^/
             user_checker: security.user_checker
@@ -20,6 +25,7 @@ security:
                 default_target_path: /admin
             logout:       true
             anonymous:    true
+
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
