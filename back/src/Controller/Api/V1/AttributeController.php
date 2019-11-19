@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AttributeController extends Controller
 {
     /**
-     * @Route("/attributes", name="attribute_list")
+     * @Route("/attributes", name="attribute_list", methods={"GET"})
      */
     public function index()
     {

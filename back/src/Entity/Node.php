@@ -20,17 +20,17 @@ class Node
     protected $id;
 
      /**
-     * @ORM\Column(type="json_array", options={"jsonb": true}, nullable=true)
+     * @ORM\Column(type="cjsonb", options={"jsonb": true}, nullable=true)
      */
     protected $title;
 
     /**
-     * @ORM\Column(type="json_array", options={"jsonb": true}, nullable=true)
+     * @ORM\Column(type="cjsonb", options={"jsonb": true}, nullable=true)
      */
     protected $description;
 
     /**
-     * @ORM\Column(type="json_array", options={"jsonb": true})
+     * @ORM\Column(type="cjsonb", options={"jsonb": true})
      */
     protected $categoriesId;
 
@@ -38,7 +38,7 @@ class Node
     protected $categories;
 
     /**
-     * @ORM\Column(type="json_array", options={"jsonb": true}, nullable=true)
+     * @ORM\Column(type="cjsonb", options={"jsonb": true}, nullable=true)
      */
     protected $attributes;
     /**

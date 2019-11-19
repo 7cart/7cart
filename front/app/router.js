@@ -11,6 +11,10 @@ Router.map(function() {
     this.route('filter', {path: '/:filter/'});
   });
   this.route('node', {path: 'node/:id/'});
+  this.route('login');
+  this.route('registration');
+
+  this.route('profile');
 });
 
 export default Router;

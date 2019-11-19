@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends Controller
 {
     /**
-     * @Route("/categories", name="category_list")
+     * @Route("/categories", name="category_list", methods={"GET"})
      */
     public function list()
     {
@@ -21,7 +21,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("/categories/{id}", name="category_show")
+     * @Route("/categories/{id}", name="category_show", methods={"GET"})
      */
     public function show($id)
     {

@@ -35,16 +35,13 @@ export default Component.extend({
   },
   init() {
     this._super(...arguments);
-    this.get('infinityModel').then(() => {
-      this.pageDidChange();
-      this.addObserver('infinityModel.content.currentPage', this, 'pageDidChange');
-    });
+    this.pageDidChange();
+    this.addObserver('infinityModel.content.currentPage', this, 'pageDidChange');
   },
   pageDidChange() {
-    this.get('infinityModel').then((im) => {
-      this.set('totalPages', this.pg(im.currentPage, im._totalPages));
-      this.set('currentId', im.currentPage);
-    });
+    let im = this.get('infinityModel');
+    this.set('totalPages', this.pg(im.currentPage, im._totalPages));
+    this.set('currentId', im.currentPage);
   },
   willDestroyElement() {
     this.removeObserver('infinityModel.content.currentPage', this, 'pageDidChange');

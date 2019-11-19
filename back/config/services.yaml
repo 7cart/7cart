@@ -29,9 +29,17 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    7cart.deserializer:
+        alias: App\Service\Deserializer
+        public: true
     7cart.serializer:
         alias: App\Service\Serializer
         public: true
     7cart.helper:
         alias: App\Service\Helper
         public: true
+
+    App\Controller\Api\V1\UserController:
+        public: true
+        arguments:
+            $formRegistrationFactory: '@fos_user.registration.form.factory'

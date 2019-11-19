@@ -16,7 +16,7 @@ class User extends BaseSchema
     public function getAttributes($data, array $fieldKeysFilter = null): ?array
     {
         return [
-            'user-name' => $data->getUserName()
+            'name' => $data->getName()
         ];
     }
 

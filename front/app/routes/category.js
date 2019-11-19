@@ -75,7 +75,10 @@ export default Route.extend({
       this.set('event', null);
     }
 
-    model.set('nodes', this.infinity.model('node', params , ExtendedInfinityModel));
+    return this.infinity.model('node', params , ExtendedInfinityModel).then((m) => {
+      model.set('nodes', m);
+    });
+
   },
   setupController(controller, model) {
     this.get('breadcrumbs').setCurrentCategory(model);

@@ -11,6 +11,7 @@
         "nelmio/cors-bundle": "^1.5",
         "neomerx/json-api": "^2.0",
         "opsway/doctrine-dbal-postgresql": "^0.8.0",
+        "pmill/doctrine-array-hydrator": "^0.1.6",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "^4.0",
         "symfony/console": "^4.0",

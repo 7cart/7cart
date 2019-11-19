@@ -6,6 +6,7 @@ use Neomerx\JsonApi\Encoder\Encoder;
 use Neomerx\JsonApi\Encoder\EncoderOptions;
 use Neomerx\JsonApi\Encoder\Parameters\EncodingParameters;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Form\Form;
 
 class Serializer
 {
@@ -15,6 +16,26 @@ class Serializer
     public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
+    }
+
+    public function serializeFormError(Form $form)
+    {
+
+        $errors = new \Neomerx\JsonApi\Exceptions\ErrorCollection();
+
+        foreach ($this->_buildErrorArray($form) as $field => $error) {
+            $errors->add(new \Neomerx\JsonApi\Document\Error(
+                null,
+                null,
+                '422',
+                null,
+                $error,
+                $error,
+                ['pointer' => "data/attributes/" . str_replace('data.','',$field)]
+            ));
+        }
+
+        return Encoder::instance()->encodeErrors($errors);
     }
 
     public function serialize($data, $meta = null)
@@ -34,19 +55,37 @@ class Serializer
         ));
 
         $options = new EncodingParameters([
-             'attribute-values',
-             'attachments'
+            'attribute-values',
+            'attachments'
         ], [
             // Attributes and relationships that should be shown
-            'categories'  => ['id', 'title', 'parent-id', 'children'],
-            'nodes'  => ['id', 'title', 'attachments', 'description', 'attributes', 'categories-id'],
-            'attachments'  => ['id', 'title', 'file-name'],
-            'attributes' => ['id', 'name', 'attribute-values', 'is-multi-values', 'is-related', 'is-numeric',  'data-type'],
+            'categories' => ['id', 'title', 'parent-id', 'children'],
+            'nodes' => ['id', 'title', 'attachments', 'description', 'attributes', 'categories-id'],
+            'attachments' => ['id', 'title', 'file-name'],
+            'attributes' => ['id', 'name', 'attribute-values', 'is-multi-values', 'is-related', 'is-numeric', 'data-type'],
             'attribute-values' => ['id', 'value'],
-            'users' => ['id', 'user-name']
+            'users' => ['id', 'name']
         ]);
 
         return $encoder->withMeta($meta)->encodeData($data, $options);
+    }
+
+    private function _buildErrorArray(Form $form)
+    {
+        $errors = [];
+
+        foreach ($form->all() as $child) {
+            $errors = array_merge(
+                $errors,
+                $this->_buildErrorArray($child)
+            );
+        }
+
+        foreach ($form->getErrors() as $error) {
+            $errors[$error->getCause()->getPropertyPath()] = $error->getMessage();
+        }
+
+        return $errors;
     }
 }
 

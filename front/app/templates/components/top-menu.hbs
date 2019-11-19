@@ -18,12 +18,13 @@
 
     <ul class="nav navbar-nav navbar-right">
       {{#if session.isAuthenticated}}
-        {{currentUser.user.userName}}
+        {{#link-to "profile" class="navbar-brand"}} {{currentUser.user.name}} {{/link-to}}
         <button {{action 'invalidateSession'}}>Logout</button>
       {{else}}
         <li>
           <div class="navbar-form">
             <button type="button" class="btn btn-default" {{action (route-action 'openModal' 'login')}}>Login</button>
+            <button type="button" class="btn btn-info" {{action (route-action 'openModal' 'registration')}}>Registration</button>
           </div>
         </li>
       {{/if}}

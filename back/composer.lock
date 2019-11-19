@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "960f358bdf269c52df3183af23733d29",
+    "content-hash": "ae5d73a7ce32e2e936357f8f7003c2b6",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2444,6 +2444,54 @@
             ],
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "time": "2019-08-22T18:11:29+00:00"
+        },
+        {
+            "name": "pmill/doctrine-array-hydrator",
+            "version": "v0.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pmill/doctrine-array-hydrator.git",
+                "reference": "65b7eb27cbef035991529160e65a338e7a0b07bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pmill/doctrine-array-hydrator/zipball/65b7eb27cbef035991529160e65a338e7a0b07bc",
+                "reference": "65b7eb27cbef035991529160e65a338e7a0b07bc",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.5"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "pmill\\Doctrine\\Hydrator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "pmill",
+                    "email": "dev.pmill@gmail.com"
+                }
+            ],
+            "description": " An array to entity hydrator for Doctrine 2 entities ",
+            "homepage": "https://github.com/pmill/doctrine-array-hydrator",
+            "keywords": [
+                "array",
+                "doctrine",
+                "hydrator",
+                "php"
+            ],
+            "time": "2018-10-25T11:30:30+00:00"
         },
         {
             "name": "psr/cache",

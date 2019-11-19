@@ -18,9 +18,32 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     */
+    protected $name;
+
     public function __construct()
     {
         parent::__construct();
         // your own logic
+        $this->setusername = 'username';
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function setEmail($email)
+    {
+        parent::setEmail($email);
+        $this->setUsername($email);
     }
 }

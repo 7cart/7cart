@@ -4,8 +4,9 @@ import { isPresent } from '@ember/utils';
 import { computed } from '@ember/object';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 import { inject as service } from '@ember/service';
+import FastbootAdapter from 'ember-data-storefront/mixins/fastboot-adapter';
 
-export default DS.JSONAPIAdapter.extend(DataAdapterMixin,{
+export default DS.JSONAPIAdapter.extend(DataAdapterMixin, FastbootAdapter, {
   fastboot: service(),
   host: computed('fastboot.isFastBoot', function() {
     let fastboot = this.fastboot;

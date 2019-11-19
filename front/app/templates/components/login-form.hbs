@@ -1,12 +1,28 @@
-{{#if errorMessage}}
-  <p>{{errorMessage}}</p>
-{{/if}}
+<div class="panel-body">
+  <div class="row">
 
-<BsForm @formLayout="vertical" @model={{this}} @onSubmit={{action "authenticate"}} as |form|>
-  <form.element @controlType="email" @label="Email" @placeholder="Email" @property="identification" @required={{true}} />
-  <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" @required={{true}} @helpText="Minimum 6 characters" />
-  <form.element @controlType="checkbox" @label="Checkbox" @property="checkbox" />
-  <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
-</BsForm>
+    <div class="col-lg-12">
+      <div class="form-group">
+        <span class="label label-danger">{{errorMessage}}</span>
+      </div>
 
+      <BsForm @formLayout="vertical" @model={{this}} @onSubmit={{action "authenticate"}} as |form|>
+        <form.element @controlType="email" @label="Email" @placeholder="Email" @property="identification" @required={{true}} />
+        <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" @required={{true}} />
+        <BsButton class="form-control btn btn-primary" @type="primary" @buttonType="submit" >
+          {{#if processing}}
+            <i class="fa fa-cog fa-spin">+</i>
+          {{/if}}
+          Login
+        </BsButton>
+      </BsForm>
+
+    </div>
+
+    <span {{action (route-action 'openModal' 'registration')}}>
+      <a href="#">Registration</a>
+    </span>
+
+  </div>
+</div>
 {{yield}}

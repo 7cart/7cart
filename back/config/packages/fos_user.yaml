@@ -5,3 +5,8 @@ fos_user:
     from_email:
         address: "%mailer_user_address%"
         sender_name: "%mailer_user_name%"
+    registration:
+        confirmation:
+            enabled:    false # change to true for required email confirmation
+        form:
+            type: App\Form\RegistrationFormType

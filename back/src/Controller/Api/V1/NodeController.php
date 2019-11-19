@@ -19,7 +19,7 @@ class NodeController extends Controller
     }
 
     /**
-     * @Route("/nodes", name="node_list")
+     * @Route("/nodes", name="node_list", methods={"GET"})
      */
     public function list(Request $request)
     {
@@ -54,7 +54,7 @@ class NodeController extends Controller
 
     /**
      *
-     * @Route("/nodes/{id}", name="node_show")
+     * @Route("/nodes/{id}", name="node_show", methods={"GET"})
      */
     public function show($id)
     {
