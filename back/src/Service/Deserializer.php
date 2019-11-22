@@ -9,19 +9,20 @@ class Deserializer
 
     private function _changeKeys($arr, &$_new = []) {
 
-        foreach ($arr as $k => &$v) {
-            if (is_array($arr[$k])){
-                $_new[$k]= [];
-                $this->_changeKeys($arr[$k], $_new[$k]);
-            } else {
-                if (strpos($k, '-') !== false) {
-                    $key = lcfirst(implode('', array_map('ucfirst', explode('-', $k))));
-                    $_new[$key] = $v;
+        if (!empty($arr)) {
+            foreach ($arr as $k => &$v) {
+                if (is_array($arr[$k])) {
+                    $_new[$k] = [];
+                    $this->_changeKeys($arr[$k], $_new[$k]);
                 } else {
-                    $_new[$k] = $v;
+                    if (strpos($k, '-') !== false) {
+                        $key = lcfirst(implode('', array_map('ucfirst', explode('-', $k))));
+                        $_new[$key] = $v;
+                    } else {
+                        $_new[$k] = $v;
+                    }
                 }
             }
-
         }
 
         return $_new;

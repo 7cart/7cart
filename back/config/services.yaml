@@ -2,8 +2,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
-    mailer_user_address: 'admin'
-    mailer_user_name: 'admin@admin.com'
+    mailer_user_address: 'admin@admin.com'
+    mailer_user_name: 'admin'
+    front_host: '%env(FRONT_HOST)%'
 
 services:
     # default configuration for services in *this* file
@@ -39,7 +40,24 @@ services:
         alias: App\Service\Helper
         public: true
 
+    json_exception_listener:
+        class: App\EventListener\JsonExceptionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 200 }
+
+    7cart.fos_customized_mailer:
+        class: App\Service\FOSCustomizedMailer
+        bind:
+          $frontHost: '%front_host%'
+        public: true
+        autowire: true
+        autoconfigure: false
+        parent: 'fos_user.mailer'
+
     App\Controller\Api\V1\UserController:
         public: true
         arguments:
             $formRegistrationFactory: '@fos_user.registration.form.factory'
+            $formResettingFactory: '@fos_user.resetting.form.factory'
+            $tokenGenerator: '@fos_user.util.token_generator'
+            $mailer: '@7cart.fos_customized_mailer'

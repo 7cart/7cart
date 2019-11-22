@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('filter', {path: '/:filter/'});
   });
   this.route('node', {path: 'node/:id/'});
+  this.route('change-password', {path: 'change-password/:token/'});
   this.route('login');
   this.route('registration');
 

@@ -11,7 +11,7 @@
         <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" @required={{true}} />
         <BsButton class="form-control btn btn-primary" @type="primary" @buttonType="submit" >
           {{#if processing}}
-            <i class="fa fa-cog fa-spin">+</i>
+            <FaIcon @icon="circle-notch" @spin={{true}} />
           {{/if}}
           Login
         </BsButton>
@@ -21,6 +21,9 @@
 
     <span {{action (route-action 'openModal' 'registration')}}>
       <a href="#">Registration</a>
+    </span>
+    <span {{action (route-action 'openModal' 'reset-password')}}>
+      <a href="#">Forgot password?</a>
     </span>
 
   </div>

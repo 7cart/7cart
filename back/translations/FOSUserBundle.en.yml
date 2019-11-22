@@ -1,0 +1,31 @@
+change_password:
+    submit: 'Change password'
+    flash:
+        success: 'The password has been changed.'
+registration:
+    email:
+        subject: 'Welcome %username%!'
+        message: |
+            Hello %username%!
+
+            To finish activating your account - please visit %confirmationUrl%
+
+            This link can only be used once to validate your account.
+
+            Regards,
+            the Team.
+resetting:
+    check_email: |
+        An email has been sent. It contains a link you must click to reset your password.
+        Note: You can only request a new password once within %tokenLifetime% hours.
+
+        If you don't get an email check your spam folder or try again.
+    email:
+        subject: 'Reset Password'
+        message: |
+            Hello %username%!
+
+            To reset your password - please visit %confirmationUrl%
+
+            Regards,
+            the Team.

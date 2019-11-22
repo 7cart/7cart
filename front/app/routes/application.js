@@ -59,7 +59,7 @@ export default Route.extend(ApplicationRouteMixin, {
         parentView: 'application'
       });
     },
-    willTransition: function(transition) {
+    willTransition: function() {
       this.send('closeModal');
     }
   }

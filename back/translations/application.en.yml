@@ -1,0 +1,3 @@
+user:
+    not_found: 'The user is not found.'
+    error: 'Token is not valid'

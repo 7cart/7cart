@@ -18,7 +18,7 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, FastbootAdapter, {
       return config.APP.backendHost;
     }
   }),
-  namespace: 'api/v1',
+  namespace: config.APP.backendNamespace,
   init() {
     this._super(...arguments);
     this.headers = {
