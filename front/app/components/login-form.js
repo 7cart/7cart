@@ -7,6 +7,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     this.set('processing', false);
+    this.set('errorMessage', '');
   },
   actions: {
     authenticate() {

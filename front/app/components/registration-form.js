@@ -41,6 +41,7 @@ export default Component.extend(Validations, {
     this._super(...arguments);
     this.set('didValidate', false);
     this.set('processing', false);
+    this.set('errorMessage', '');
   },
   emailObserves: observer('email', function () {
     this.set('errors', null);
@@ -65,6 +66,7 @@ export default Component.extend(Validations, {
         }).catch((errors) => {
           this.set('processing', false);
           this.set('errors', user.get('errors'));
+          this.set('errorMessage', Object.create(errors).get('errors.0.title'));
           user.rollbackAttributes();
         })
       });

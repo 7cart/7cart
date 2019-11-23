@@ -27,6 +27,8 @@ export default Component.extend(Validations,{
     this._super(...arguments);
     this.set('didValidate', false);
     this.set('processing', false);
+    this.set('errorMessage', '');
+    this.set('successMessage', '');
   },
   actions: {
     change() {
