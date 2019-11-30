@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "@fortawesome/ember-fontawesome": "^0.2.1",
+    "@fortawesome/free-brands-svg-icons": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "bootstrap-sass": "^3.4.1",
     "broccoli-asset-rev": "^2.7.0",
@@ -27,6 +28,7 @@
     "ember-cli-app-version": "^3.2.0",
     "ember-cli-babel": "^6.6.0",
     "ember-cli-dependency-checker": "^2.2.1",
+    "ember-cli-dotenv": "^2.2.3",
     "ember-cli-eslint": "^4.2.1",
     "ember-cli-fastboot": "^2.2.1",
     "ember-cli-htmlbars": "^2.0.5",
@@ -53,7 +55,8 @@
     "ember-truth-helpers": "^2.1.0",
     "ember-welcome-page": "^3.2.0",
     "eslint-plugin-ember": "^5.4.0",
-    "loader.js": "^4.7.0"
+    "loader.js": "^4.7.0",
+    "torii": "^0.10.1"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"

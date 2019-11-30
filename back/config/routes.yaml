@@ -1,19 +1,21 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+social_auth:
+    path:  /torii/redirect.html
 
-homepage:
-    path: /
-    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
-    defaults:
-        path: /login
-        permanent: true
+7cart_server_token:
+    path: /oauth/v2/token
+    controller: App\Controller\TokenController::tokenAndSocialAction
+    methods:    GET|POST
 
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+fos_user_login:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    prefix: /_security
 
-fos_oauth_server_token:
-    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+#fos_user:
+#    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+#    prefix: /admin
 
-fos_oauth_server_authorize:
-    resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
+#fos_oauth_server_token:
+#    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+#
+#fos_oauth_server_authorize:
+#    resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"

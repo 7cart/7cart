@@ -12,7 +12,7 @@ services:
         sleep 1;
       done;)
     && php bin/console  doctrine:migrations:migrate --no-interaction --allow-no-migration &&
-    cp .env.dist .env &&
+    cp -n .env.dist .env &&
     php-fpm;
     '"
     networks:
@@ -48,7 +48,7 @@ services:
           - POSTGRES_DB=scart
   nodejs:
       image: 'bitnami/node:8'
-      command: "sh -c 'npm install --unsafe && ./node_modules/ember-cli/bin/ember serve'"
+      command: "sh -c 'cp -n .env.dist .env && npm install --unsafe && ./node_modules/ember-cli/bin/ember serve'"
       ports:
         - 4200:4200
         - 7020:7020

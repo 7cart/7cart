@@ -7,4 +7,4 @@ fos_oauth_server:
     service:
         user_provider: fos_user.user_provider.username_email
         options:
-            access_token_lifetime: 10
+            access_token_lifetime: 100

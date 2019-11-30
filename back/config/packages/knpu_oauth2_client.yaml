@@ -1,0 +1,19 @@
+knpu_oauth2_client:
+    clients:
+        # the key "facebook_main" can be anything, it
+        # will create a service: "knpu.oauth2.client.facebook_main"
+        facebook-oauth2:
+            # this will be one of the supported types
+            type: facebook
+            client_id: '%env(OAUTH_FACEBOOK_ID)%'
+            client_secret: '%env(OAUTH_FACEBOOK_SECRET)%'
+            # the route that you're redirected to after
+            # see the controller example below
+            redirect_route: social_auth
+            graph_api_version: v2.12
+        google-oauth2:
+            # this will be one of the supported types
+            type: google
+            client_id: '%env(OAUTH_GOOGLE_ID)%'
+            client_secret: '%env(OAUTH_GOOGLE_SECRET)%'
+            redirect_route: social_auth

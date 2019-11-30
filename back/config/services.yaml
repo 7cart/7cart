@@ -54,6 +54,11 @@ services:
         autoconfigure: false
         parent: 'fos_user.mailer'
 
+    App\Controller\TokenController:
+        public: true
+        arguments:
+            - '@fos_oauth_server.server'
+
     App\Controller\Api\V1\UserController:
         public: true
         arguments:

@@ -1,0 +1,9 @@
+<div>
+  <span {{action 'socilAuth' 'facebook-oauth2'}} >
+    <FaIcon @icon="facebook-square" @prefix="fab" @size="3x" color="#3b5998"  @transform="shrink-6" @mask="circle"/>
+  </span>
+  <span {{action 'socilAuth' 'google-oauth2'}} >
+    <FaIcon @icon="google" @prefix="fab" @size="3x" color="#dd4b39"  @transform="shrink-5" @mask="circle" />
+  </span>
+</div>
+{{yield}}

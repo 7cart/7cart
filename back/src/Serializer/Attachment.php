@@ -19,7 +19,7 @@ class Attachment extends BaseSchema
         //@TODO: rewrite global variable
         global $kernel;
         /** @var AttachmentEntity $data */
-        $baseUrl = $kernel->getContainer()->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost();
+        $baseUrl = $_ENV['FRONT_HOST'];
         return [
             'title' => $data->getTitle(),
             'file-name' => $baseUrl.$kernel->getContainer()->get('vich_uploader.templating.helper.uploader_helper')->asset($data, 'attachmentFile')

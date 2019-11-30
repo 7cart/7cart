@@ -5,10 +5,33 @@ namespace App\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\ORM\Mapping\AttributeOverrides;
+use Doctrine\ORM\Mapping\AttributeOverride;
+
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
+ *
+ * @ORM\AttributeOverrides({
+ *     @ORM\AttributeOverride(name="email",
+ *          column=@ORM\Column(
+ *              nullable = true,
+ *              length=180
+ *          )
+ *      ),
+ *     @ORM\AttributeOverride(name="emailCanonical",
+ *          column=@ORM\Column(
+ *              name = "email_canonical",
+ *              nullable = true,
+ *              unique=true,
+ *              length=180
+ *          )
+ *      )
+ * })
+ *
  */
 class User extends BaseUser
 {

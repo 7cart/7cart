@@ -17,21 +17,45 @@ module.exports = function(environment) {
       }
     },
 
+    torii: {
+      disableRedirectInitializer: true,
+      sessionServiceName: 'session-torii',
+      providers: {
+        'facebook-oauth2': {
+          apiKey: process.env.OAUTH_FACEBOOK_ID,
+          redirectUri: process.env.FRONT_HOST+'/torii/redirect.html',
+          scope: 'email'
+        },
+        'google-oauth2': {
+          apiKey: process.env.OAUTH_GOOGLE_ID,
+          redirectUri: process.env.FRONT_HOST+'/torii/redirect.html',
+          scope: 'email, profile'
+        }
+      }
+    },
+
+    'ember-simple-auth': {
+      authenticationRoute: 'login',
+      routeAfterAuthentication: 'application',
+      routeIfAlreadyAuthenticated: 'application'
+    },
+
+
     APP: {
-      backendHost: 'http://localhost:8000',
-      backendNamespace: 'api/v1',
-      backendDockerHost: 'http://nginx:8000',
+      backendHost: process.env.BACKEND_HOST,
+      backendNamespace: process.env.BACKEND_NAMESPACE,
+      backendDockerHost: 'http://nginx:8000', //inside Docker
       // Here you can pass flags/options to your application instance
       // when it is created
     },
     fastboot: {
-      hostWhitelist: [/^127.0.0.1:\d+$/, /^localhost:\d+$/]
+      hostWhitelist: [/^127.0.0.1:\d+$/, /^localhost:\d+$/, /^localhost$/]
     }
   };
 
   if (environment === 'development') {
-    ENV.APP.backendHost = 'http://localhost:8000';
-    ENV.APP.backendNamespace = 'api/v1';
+    ENV.APP.backendHost = process.env.BACKEND_HOST;
+    ENV.APP.backendNamespace =  process.env.BACKEND_NAMESPACE;
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;

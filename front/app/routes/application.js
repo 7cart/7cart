@@ -6,7 +6,9 @@ import { getOwner } from '@ember/application';
 
 export default Route.extend(ApplicationRouteMixin, {
   currentUser: service(),
-  beforeModel(transition) {
+  router: service(),
+
+  beforeModel() {
     return this._loadCurrentUser();
   },
 
@@ -24,7 +26,10 @@ export default Route.extend(ApplicationRouteMixin, {
       this.transitionTo(redirectTarget);
       cookies.clear('ember_simple_auth-redirectTarget');
     } else {
-      // this.transitionTo(this.get('routeAfterAuthentication'));
+      let current = this.get('router.currentRouteName');
+      if (current == 'registration' || current == 'login') {
+        this.transitionTo(this.get('routeAfterAuthentication'));
+      }
     }
   },
 
