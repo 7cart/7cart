@@ -29,7 +29,7 @@ module.exports = function(environment) {
         'google-oauth2': {
           apiKey: process.env.OAUTH_GOOGLE_ID,
           redirectUri: process.env.FRONT_HOST+'/torii/redirect.html',
-          scope: 'email, profile'
+          scope: 'email profile'
         }
       }
     },
