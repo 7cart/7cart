@@ -32,7 +32,7 @@ services:
       ports:
         - 8000:8000
       volumes:
-        - ./nginx/vhost.conf:/bitnami/nginx/conf/vhosts/7cart.conf
+        - ./nginx/vhost.conf:/opt/bitnami/nginx/conf/server_blocks/7cart.conf
         - ../back/public/:/app/public
   postgresql:
     image: 'postgres:11'
