@@ -59,7 +59,7 @@ export default Component.extend(Validations, {
         this.set('processing', true);
         user.save().then((_user) => {
           this.get('session').authenticate('authenticator:oauth2', _user.get('email'), user.get('plainPassword')).catch((reason) => {
-            this.set('errorMessage', Object.create(reason).get('responseJSON.error_description'));
+            this.set('errorMessage', Object.create(reason).get('error_description'));
           }).finally(() => {
             this.set('processing', false);
           });

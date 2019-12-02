@@ -45,6 +45,8 @@ module.exports = function(environment) {
       backendHost: process.env.BACKEND_HOST,
       backendNamespace: process.env.BACKEND_NAMESPACE,
       backendDockerHost: 'http://nginx:8000', //inside Docker
+      oAuth2Client: process.env.OAUTH2_CLIENT_ID,
+      oAuth2Secret: process.env.OAUTH2_CLIENT_SECRET
       // Here you can pass flags/options to your application instance
       // when it is created
     },

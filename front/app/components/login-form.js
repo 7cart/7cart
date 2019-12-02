@@ -18,7 +18,7 @@ export default Component.extend({
       let { identification, password } = this.getProperties('identification', 'password');
       this.set('processing', true);
       this.get('session').authenticate('authenticator:oauth2', identification, password).catch((reason) => {
-         this.set('errorMessage', Object.create(reason).get('responseJSON.error_description'));
+         this.set('errorMessage', Object.create(reason).get('error_description'));
       }).finally(() => {
         this.set('processing', false);
       });
