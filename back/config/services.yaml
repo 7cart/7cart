@@ -40,6 +40,13 @@ services:
         alias: App\Service\Helper
         public: true
 
+
+    App\EventListener\VichListener:
+        arguments:
+            $validator: '@validator'
+        tags:
+            - { name: kernel.event_listener, event: vich_uploader.pre_upload, method: onVichUploaderPreUpload }
+
     json_exception_listener:
         class: App\EventListener\JsonExceptionListener
         tags:

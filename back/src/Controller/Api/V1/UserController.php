@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api\V1;
 
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,7 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Form\Factory\FormFactory;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-
 
 class UserController extends Controller
 {
@@ -31,13 +31,22 @@ class UserController extends Controller
      *
      * @Route("/users", name="users_index", methods={"GET"})
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->query->get('me')) {
+            if (false === $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+                throw new AccessDeniedException();
+            }
 
-        if (false === $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw new AccessDeniedException();
+            return new Response($this->get('7cart.serializer')->serialize($this->getUser()));
+        } else {
+            $users = $this->getDoctrine()
+                ->getRepository( User::class)
+                ->findAll();
+
+            return new Response($this->get('7cart.serializer')->serialize($users));
         }
-        return new Response($this->get('7cart.serializer')->serialize($this->getUser()));
+
     }
 
     /**
@@ -46,7 +55,7 @@ class UserController extends Controller
      */
     public function registration(Request $request)
     {
-        $form = $this->_formRegistrationFactory->createForm(array('csrf_protection' => false));
+        $form = $this->_formRegistrationFactory->createForm(array('csrf_protection' => false, 'allow_extra_fields' => true));
         $attr = $this->get('7cart.deserializer')->deserializeRequestAttributes($request);
 
         $form->submit($attr);
@@ -114,7 +123,7 @@ class UserController extends Controller
         }
 
         $form = $this->_formResettingFactory->createForm(array('csrf_protection' => false));
-        $attr['plainPassword'] =  ['first' => $newPassword, 'second' => $newPassword];
+        $attr['plainPassword'] = ['first' => $newPassword, 'second' => $newPassword];
         $form->setData($user);
         $form->submit($attr);
         if ($form->isValid()) {
@@ -126,6 +135,58 @@ class UserController extends Controller
         } else {
             return new Response($this->get('7cart.serializer')->serializeFormError($form), 422);
         }
+    }
+
+    /**
+     *
+     * @Route("/users/{id}", name="user_edit", methods={"PATCH"})
+     */
+    public function edit($id, Request $request)
+    {
+        if (false === $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw new AccessDeniedException();
+        }
+
+        $attr = $this->get('7cart.deserializer')->deserializeRequestAttributes($request);
+
+        /** @var User $user */
+        $user = $this->getUser();
+        $user->setName($attr['name']);
+        if (!$user->getEmail()) {
+            $user->setEmail($attr['email']);
+        }
+
+        $errors = $this->get('validator')->validate($user);
+        if (count($errors) > 0) {
+            return new Response($this->get('7cart.serializer')->serializeValidatorError($errors), 422);
+        }
+
+        $userManager = $this->get('fos_user.user_manager');
+        $userManager->updateUser($user);
+
+        return new Response($this->get('7cart.serializer')->serialize($user));
+
+    }
+
+    /**
+     * @Route("/users/upload", name="upload_avatar", methods={"POST"})
+     *
+     */
+    public function downloadAvatarAction(Request $request)
+    {
+        if (false === $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw new AccessDeniedException();
+        }
+
+
+        $user = $this->getUser();
+        $user->setAvatarFile($request->files->get('file'));
+
+        $userManager = $this->get('fos_user.user_manager');
+        $userManager->updateUser($user);
+
+        return new Response($this->get('7cart.serializer')->serialize($user));
+
     }
 
 }

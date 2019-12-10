@@ -17,9 +17,9 @@ class Deserializer
                 } else {
                     if (strpos($k, '-') !== false) {
                         $key = lcfirst(implode('', array_map('ucfirst', explode('-', $k))));
-                        $_new[$key] = $v;
+                        $_new[$key] = trim($v);
                     } else {
-                        $_new[$k] = $v;
+                        $_new[$k] = trim($v);
                     }
                 }
             }

@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -25,6 +26,5 @@ class RegistrationFormType extends AbstractType
     {
         return 'app_user_registration';
     }
-
 
 }

@@ -8,6 +8,8 @@ use Neomerx\JsonApi\Encoder\Parameters\EncodingParameters;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Form\Form;
 
+use Symfony\Component\Validator\ConstraintViolationList;
+
 class Serializer
 {
 
@@ -16,6 +18,25 @@ class Serializer
     public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
+    }
+
+    public function serializeValidatorError(ConstraintViolationList $errors)
+    {
+        $_errors = new \Neomerx\JsonApi\Exceptions\ErrorCollection();
+
+        foreach ($errors as $error) {
+            $_errors->add(new \Neomerx\JsonApi\Document\Error(
+                null,
+                null,
+                '422',
+                null,
+                $error->getMessage(),
+                $error->getMessage(),
+                ['pointer' => "data/attributes/" . $error->getPropertyPath()]
+            ));
+        }
+
+        return Encoder::instance()->encodeErrors($_errors);
     }
 
     public function serializeFormError(Form $form)
@@ -64,7 +85,7 @@ class Serializer
             'attachments' => ['id', 'title', 'file-name'],
             'attributes' => ['id', 'name', 'attribute-values', 'is-multi-values', 'is-related', 'is-numeric', 'data-type'],
             'attribute-values' => ['id', 'value'],
-            'users' => ['id', 'name']
+            'users' => ['id', 'name', 'email', 'avatar-url']
         ]);
 
         return $encoder->withMeta($meta)->encodeData($data, $options);

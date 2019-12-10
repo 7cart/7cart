@@ -14,10 +14,11 @@ class JsonExceptionListener
         $code = empty($code) ? 404 : $code;
 
         $data = array(
-            'error' => array(
+            'errors' => [array(
                 'code' => $code,
                 'message' => $event->getException()->getMessage(),
-            )
+                'title' => $event->getException()->getMessage()
+            )],
         );
         $response = new JsonResponse($data, $code);
         $event->setResponse($response);

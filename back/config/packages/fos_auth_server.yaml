@@ -6,5 +6,5 @@ fos_oauth_server:
     auth_code_class:     App\Entity\OAuth2\AuthCode
     service:
         user_provider: fos_user.user_provider.username_email
-        options:
-            access_token_lifetime: 100
+#        options:
+#            access_token_lifetime: 100

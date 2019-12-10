@@ -1,0 +1,28 @@
+{{#if model.uploadImageOriginal}}
+  {{#if model.croppedUrl}}
+    <img src="{{model.croppedUrl}}" style="width: 150px; border-radius: 50%;"/>
+  {{else}}
+    <FaIcon @icon="circle-notch" @spin={{true}} @size="4x"/>
+  {{/if}}
+  {{#image-cropper
+    source=model.url
+    options=(hash
+      aspectRatio=1
+      viewMode=2
+    )  as |cropper|}}
+
+    <div style="width: 150px;">
+      {{cropper.on 'crop' action=(action 'crop')}}
+    </div>
+  {{/image-cropper}}
+{{else}}
+  {{#if uploadedUrl}}
+    <img src="{{uploadedUrl}}" style="width: 150px; border-radius: 50%;"/>
+  {{/if}}
+{{/if}}
+
+{{#file-upload name="avatar"
+               accept="image/*"
+               onfileadd=(action 'setAvatar' model)}}
+  <a id="upload-avatar" tabindex=0>Add a photo of yourself</a>
+{{/file-upload}}
