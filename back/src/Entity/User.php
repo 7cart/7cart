@@ -8,11 +8,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\AttributeOverrides;
 use Doctrine\ORM\Mapping\AttributeOverride;
 
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @Vich\Uploadable
  * @ORM\HasLifecycleCallbacks
  *
  * @ORM\AttributeOverrides({
@@ -49,6 +55,25 @@ class User extends BaseUser
     protected $name;
 
     /**
+     * @Assert\Email()
+     */
+    protected $email;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $avatarName;
+
+    /**
+     *
+     * @Vich\UploadableField(mapping="avatar", fileNameProperty="avatarName")
+     * @var File
+     * @Assert\Image(mimeTypes={"image/*"})
+     *
+     */
+    private $avatarFile;
+
+    /**
      * @var datetime $created
      *
      * @ORM\Column(type="datetime",  nullable = true)
@@ -61,6 +86,13 @@ class User extends BaseUser
      * @ORM\Column(type="datetime", nullable = true)
      */
     protected $updated;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime|null
+     */
+    private $uploadedAt;
 
     /**
      * Gets triggered only on insert
@@ -102,5 +134,45 @@ class User extends BaseUser
     {
         parent::setEmail($email);
         $this->setUsername($email);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvatarName()
+    {
+        return $this->avatarName;
+    }
+
+    /**
+     * @param mixed $avatarName
+     */
+    public function setAvatarName($avatarName): void
+    {
+        $this->avatarName = $avatarName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvatarFile()
+    {
+        return $this->avatarFile;
+    }
+
+    /**
+     * @param File $avatarFile
+     */
+    public function setAvatarFile(File $avatarFile): void
+    {
+        $this->avatarFile = $avatarFile;
+        if ($avatarFile instanceof UploadedFile) {
+            $this->uploadedAt = new \DateTime("now");
+        }
+    }
+
+    public function getUploadedAt()
+    {
+        return $this->uploadedAt;
     }
 }

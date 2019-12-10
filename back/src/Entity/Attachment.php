@@ -5,6 +5,8 @@ namespace App\Entity;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -37,6 +39,7 @@ class Attachment
     protected $fileName;
 
     /**
+     * @Assert\Image(mimeTypes={"image/*"})
      * @Vich\UploadableField(mapping="node_attachments", fileNameProperty="fileName")
      * @var File
      */
@@ -111,7 +114,7 @@ class Attachment
     public function setAttachmentFile(File $attachment = null)
     {
         $this->attachmentFile = $attachment;
-        if ($attachment) {
+        if ($attachment instanceof UploadedFile) {
             $this->uploadedAt = new \DateTime('now');
         }
     }

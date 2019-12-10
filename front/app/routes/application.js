@@ -12,6 +12,13 @@ export default Route.extend(ApplicationRouteMixin, {
     return this._loadCurrentUser();
   },
 
+  init() {
+    this._super(...arguments);
+    this.on('routeWillChange', () => {
+      this.send('closeModal');
+    });
+  },
+
   async sessionAuthenticated() {
     await this._loadCurrentUser();
 
@@ -63,9 +70,6 @@ export default Route.extend(ApplicationRouteMixin, {
         outlet: 'modal',
         parentView: 'application'
       });
-    },
-    willTransition: function() {
-      this.send('closeModal');
     }
   }
 });

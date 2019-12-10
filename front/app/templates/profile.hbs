@@ -1,1 +1,44 @@
-name: {{model.name}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div>
+
+        <div class="profile-usertitle">
+          <div class="profile-usertitle-name">
+            {{model.name}}
+          </div>
+        </div>
+
+        <div>
+          {{elements/upload-image-cropper uploadImage=this.uploadImage uploadedUrl=model.avatarUrl}}
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-9">
+
+      <div class="form-group">
+        <span class="label label-danger">{{errorMessage}}</span>
+      </div>
+
+      <BsTab as |tab|>
+        <tab.pane @title="Tab 1">
+          <BsForm @formLayout="vertical" @model={{model}} as |form|>
+            <form.element  @label="Name" @placeholder="Name" @property="name"  />
+            <form.element  @label="Email" @placeholder="Email" @property="email" @required={{true}} @disabled={{if model.email true false}} />
+          </BsForm>
+        </tab.pane>
+        <tab.pane @title="Tab 2">
+          <p></p>
+        </tab.pane>
+      </BsTab>
+    </div>
+
+{{#if this.isDirty}}
+    <div style="text-align: center">
+    <button {{action 'submit'}}>Save</button>
+    </div>
+{{/if}}
+
+  </div>
+</div>
