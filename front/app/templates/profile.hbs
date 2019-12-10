@@ -25,7 +25,7 @@
         <tab.pane @title="Tab 1">
           <BsForm @formLayout="vertical" @model={{model}} as |form|>
             <form.element  @label="Name" @placeholder="Name" @property="name"  />
-            <form.element  @label="Email" @placeholder="Email" @property="email" @required={{true}} />
+            <form.element  @label="Email" @placeholder="Email" @property="email" @required={{true}} @disabled={{if model.email true false}} />
           </BsForm>
         </tab.pane>
         <tab.pane @title="Tab 2">
